@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.6.33829.357
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TorchTrackApp", "TorchTrackApp\TorchTrackApp.csproj", "{F5422165-812F-4557-A6A3-ECB734EA0010}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F5422165-812F-4557-A6A3-ECB734EA0010}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F5422165-812F-4557-A6A3-ECB734EA0010}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F5422165-812F-4557-A6A3-ECB734EA0010}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F5422165-812F-4557-A6A3-ECB734EA0010}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {68FA96A0-7CFE-45C9-A797-979EC8E7F9F1}
+	EndGlobalSection
+EndGlobal
