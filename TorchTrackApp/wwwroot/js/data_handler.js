@@ -21,11 +21,12 @@ function get_torch_track_data(model_name) {
 }
 
 function html_builder(key, data) {
-    let parent_data_div = document.getElementById("parent-data-id");
-    var h2 = `<h2>${key}</h2>`;
-    var h4_obj = `<h4>${data}</h4>`;
+    let parent_data_div = document.getElementById("card-body-id");
+    var h2 = `<h4>${key}</h4>`;
+    var html_break = `<hr >`;
+    var h4_obj = `<label>${data}</label>`;
 
-    parent_data_div.innerHTML += h2 + h4_obj;
+    parent_data_div.innerHTML += html_break + h2 + h4_obj;
 }
 
 function object_parser(obj) {
