@@ -8,11 +8,9 @@ function get_torch_track_data(model_name) {
         success: function (data) {
             try {
                 temp_array = data
-                req_data_parser(temp_array)
-                //loopThrough(temp_array)
-                //console.log(temp_array)
-
-            } catch (error) {
+                json_data_parser(temp_array)
+            }
+            catch (error) {
                 console.error('Error processing data:', error.message);
             }
         },
@@ -25,29 +23,30 @@ function get_torch_track_data(model_name) {
 function html_builder(key, data) {
     let parent_data_div = document.getElementById("parent-data-id");
     var h2 = `<h2>${key}</h2>`;
+    var h4_obj = `<h4>${data}</h4>`;
 
-    parent_data_div.innerHTML += h2;
+    parent_data_div.innerHTML += h2 + h4_obj;
 }
 
-function loopThrough(obj) {
+function object_parser(obj) {
     for (let key in obj) {
         if (obj.hasOwnProperty(key)) {
-            console.log(key, obj[key]);
-            html_builder(key, obj[key])
-
-            if (typeof obj[key] === 'object') {
-                loopThrough(obj[key]);
+            if (typeof obj[key] === 'object' && !Array.isArray(obj[key])) {
+                object_parser(obj[key]);
+            }
+            else {
+                console.log(key, obj[key]);
+                html_builder(key, obj[key]);
             }
         }
     }
 }
 
-function req_data_parser(data) {
+function json_data_parser(data) {
     for (var i = 0; i < data.length; i++) {
-        const parsed_json = JSON.parse(data[i].model_optimizer, null, 4);
-        let html_p = document.getElementById("p-id")
+        const parsed_json = JSON.parse(data[i].model_training_data);
 
-        loopThrough(parsed_json)
+        object_parser(parsed_json)
     }
 }
 
