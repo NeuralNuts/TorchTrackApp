@@ -1,8 +1,8 @@
 let temp_array = [];
 
-function get_torch_track_data(model_name) {
+function get_torch_track_data() {
     $.ajax({
-        url: "https://torchtrackapp.azurewebsites.net/api/TorchTrack/GetTorchTraclLib?model_name=" + encodeURIComponent(model_name),
+        url: "https://localhost:7032/api/TorchTrack/GetTraining",
         type: 'GET',
         dataType: 'json',
         success: function (data) {
@@ -20,13 +20,28 @@ function get_torch_track_data(model_name) {
     });
 }
 
+function html_run_builder(loop) {
+    let header_div = document.getElementById("card-header-id");
+
+    var h2 = `<h5 class="mb-2">
+                    Training Run: 
+                    <button class="btn btn" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+                        ${loop}
+                    </button>
+              </h5>`;
+
+    header_div.innerHTML += h2;
+}
+
 function html_builder(key, data) {
-    let parent_data_div = document.getElementById("card-body-id");
+    let colap_div = document.getElementById("collapseOne");
+
     var h2 = `<h4>${key}</h4>`;
     var html_break = `<hr >`;
     var h4_obj = `<label>${data}</label>`;
 
-    parent_data_div.innerHTML += html_break + h2 + h4_obj;
+
+    colap_div.innerHTML += html_break + h2 + h4_obj;
 }
 
 function object_parser(obj) {
@@ -46,9 +61,11 @@ function object_parser(obj) {
 function json_data_parser(data) {
     for (var i = 0; i < data.length; i++) {
         const parsed_json = JSON.parse(data[i].model_training_data);
+        const parsed_json_run = data[i].training_run;
 
-        object_parser(parsed_json)
+        html_run_builder(parsed_json_run);
+        object_parser(parsed_json);
     }
 }
 
-get_torch_track_data("Bing");
+get_torch_track_data();

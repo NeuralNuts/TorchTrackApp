@@ -11,6 +11,3 @@
         });
     }
 });
-
-localStorage.setItem();
-localStorage.setItem();

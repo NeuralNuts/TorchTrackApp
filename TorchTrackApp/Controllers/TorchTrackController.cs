@@ -22,9 +22,29 @@ namespace TorchTrackApp.Controllers
 
         [EnableCors]
         [HttpGet]
-        [Route("GetTorchTraclLib")]
-        public async Task<List<TorchTrackModel>> GetTorchTrackLib(string model_name) =>
-            await _mongodb_services.GetModelsByModelName(model_name);
+        [Route("GetTorchModels")]
+        public async Task<List<TorchTrackModel>> GetTorchModels() =>
+            await _mongodb_services.GetTorchModels();
+
+        [EnableCors]
+        [HttpGet]
+        [Route("GetTraining")]
+        public async Task<List<TrainingDataModel>> GetTrainingData() =>
+            await _mongodb_services.GetTrainingData();
+
+        [EnableCors]
+        [HttpGet]
+        [Route("GetTrainingByTrainingRun")]
+        public async Task<List<TrainingRunModel>> GetTrainingDataByTrainingRun() =>
+            await _mongodb_services.GetTrainingRun();
+
+
+        [EnableCors]
+        [HttpGet]
+        [Route("GetTrainingDataByRun")]
+        public async Task<TrainingDataModel> GetTrainingDataByRun(int training_run) =>
+            await _mongodb_services.GetTrainingRun(training_run);
+
 
         [EnableCors]
         [HttpPost]
@@ -33,7 +53,7 @@ namespace TorchTrackApp.Controllers
         {
             await _mongodb_services.CreateModelDataSchema(torch_track_model);
 
-            return CreatedAtAction(nameof(GetTorchTrackLib), new { id = torch_track_model.Id }, torch_track_model);
+            return CreatedAtAction(nameof(GetTorchModels), new { id = torch_track_model.Id }, torch_track_model);
         }
 
         [EnableCors]
@@ -43,7 +63,7 @@ namespace TorchTrackApp.Controllers
         {
             await _mongodb_services.CreateTrainingData(training_model);
 
-            return CreatedAtAction(nameof(GetTorchTrackLib), new { id = training_model.Id }, training_model);
+            return CreatedAtAction(nameof(GetTrainingData), new { id = training_model.Id }, training_model);
         }
 
         [EnableCors]

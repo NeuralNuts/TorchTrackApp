@@ -2,11 +2,6 @@
 using Microsoft.Extensions.Options;
 using MongoDB.Bson;
 using MongoDB.Driver;
-using System.Runtime.CompilerServices;
-using MongoDB.Bson.IO;
-using System.Text.Json;
-using Newtonsoft.Json.Linq;
-using Microsoft.AspNetCore.Mvc;
 
 namespace TorchTrackApp.Services
 {
@@ -38,12 +33,42 @@ namespace TorchTrackApp.Services
             .Collection2);
         }
 
-        public async Task<List<TorchTrackModel>> GetModelsByModelName(string model_name)
+        public async Task<List<TorchTrackModel>> GetTorchModels()
         {
-            var filter = Builders<TorchTrackModel>.Filter.Eq(x => x.model_name, model_name);
-            var models = await _torch_track_collection.Find(filter).ToListAsync();
+            var model_data = await _torch_track_collection.Find(new BsonDocument()).ToListAsync();
 
-            return models;
+            return model_data;
+        }
+
+        public async Task<List<TrainingDataModel>> GetTrainingData()
+        {
+            var training_data = await _training_data_collection.Find(new BsonDocument()).ToListAsync();
+
+            return training_data;
+        }
+        
+        public async Task<List<TrainingRunModel>> GetTrainingRun()
+        {
+            var projection = Builders<TrainingDataModel>
+                .Projection
+                .Include(u => u.training_run)
+                .Exclude(u => u.Id);
+
+            var training_data = await _training_data_collection
+                .Find(new BsonDocument())
+                .Project<TrainingRunModel>(projection)
+                .ToListAsync();
+
+            return training_data;
+        }
+
+
+        public async Task<TrainingDataModel> GetTrainingRun(int training_run)
+        {
+            var filter = Builders<TrainingDataModel>.Filter.Eq(u => u.training_run, training_run);
+            var training_data = await _training_data_collection.Find(filter).FirstOrDefaultAsync();
+
+            return training_data;
         }
 
         public async Task DeleteAll()
