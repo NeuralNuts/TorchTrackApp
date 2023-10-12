@@ -12,3 +12,5 @@
     }
 });
 
+localStorage.setItem();
+localStorage.setItem();

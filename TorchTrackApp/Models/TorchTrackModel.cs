@@ -12,6 +12,7 @@ namespace TorchTrackApp.Models
         [BsonRepresentation(BsonType.ObjectId)]
         [DefaultValue("")]
         public string? Id { get; set; }
+        public int training_run { get; set; }
         public string? model_name { get; set; }
         public string? model_architecure { get; set; }
         public string? model_optimizer { get; set; }

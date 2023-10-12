@@ -29,32 +29,28 @@ namespace TorchTrackApp.Services
             .Collection1);
         }
 
-        //public async Task<List<TorchTrackModel>> GetModelData(string model_name)
-        //{
-        //    var model_name_filter = Builders<TorchTrackModel>
-        //        .Filter
-        //        .Eq(u => u.model_name, model_name);
-
-
-
-        //    return await _torch_track_collection
-        //    .Find(model_name_filter)
-        //    .ToListAsync();
-        //}
-
-        public async Task<List<TorchTrackModel>> GetModelsByModelName(string modelName)
+        public async Task<List<TorchTrackModel>> GetModelsByTrainingRun(int trainning_run)
         {
+            var filter = Builders<TorchTrackModel>.Filter.Eq(x => x.training_run, trainning_run);
+            var training_data = await _torch_track_collection.Find(filter).ToListAsync();
 
-            var filter = Builders<TorchTrackModel>.Filter.Eq(x => x.model_name, modelName);
+
+            return training_data; 
+        }
+
+        public async Task<List<TorchTrackModel>> GetModelsByModelName(string model_name)
+        {
+            var filter = Builders<TorchTrackModel>.Filter.Eq(x => x.model_name, model_name);
             var models = await _torch_track_collection.Find(filter).ToListAsync();
 
-            return models;
+            return models; 
         }
 
         public async Task CreateModelDataSchema(TorchTrackModel torch_track_model)
         {
-            await _torch_track_collection
-            .InsertOneAsync(torch_track_model);
+            var insert = _torch_track_collection.InsertOneAsync(torch_track_model);
+
+            await insert;
             return;
         }
     }
