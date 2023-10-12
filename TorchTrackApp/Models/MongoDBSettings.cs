@@ -12,5 +12,8 @@ namespace TorchTrackApp.Models
 
         public string Collection1
         { get; set; } = null!;
+
+        public string Collection2
+        { get; set; } = null!;
     }
 }

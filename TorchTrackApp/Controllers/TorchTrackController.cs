@@ -20,13 +20,6 @@ namespace TorchTrackApp.Controllers
         public TorchTrackController(MongoDBServices mongodb_services) =>
         _mongodb_services = mongodb_services;
 
-        [EnableCors]        
-        [HttpGet]
-        [Route("GetTrainingRun")]
-        public async Task<List<TorchTrackModel>> GetTrainingRun(int training_run) =>
-            await _mongodb_services.GetModelsByTrainingRun(training_run);
-
-
         [EnableCors]
         [HttpGet]
         [Route("GetTorchTraclLib")]
@@ -38,19 +31,25 @@ namespace TorchTrackApp.Controllers
         [Route("PostModelData")]
         public async Task<IActionResult> PostSingleModelData([FromBody] TorchTrackModel torch_track_model)
         {
-            int x = torch_track_model.training_run;
-
-            if (_mongodb_services.GetModelsByTrainingRun(x).Result.Equals(3))
-            {
-                var new_trtraining_run = torch_track_model.training_run = torch_track_model.training_run ++;
-                await _mongodb_services.CreateModelDataSchema(torch_track_model);
-            }
-            else
-            {    
-                return BadRequest();
-            }
+            await _mongodb_services.CreateModelDataSchema(torch_track_model);
 
             return CreatedAtAction(nameof(GetTorchTrackLib), new { id = torch_track_model.Id }, torch_track_model);
         }
+
+        [EnableCors]
+        [HttpPost]
+        [Route("PostTrainginData")]
+        public async Task<IActionResult> PostSingleTrainingData([FromBody] TrainingDataModel training_model)
+        {
+            await _mongodb_services.CreateTrainingData(training_model);
+
+            return CreatedAtAction(nameof(GetTorchTrackLib), new { id = training_model.Id }, training_model);
+        }
+
+        [EnableCors]
+        [HttpDelete]
+        [Route("DestroyerOfWordls")]
+        public async Task DestroyerOfWorlds() =>
+            await _mongodb_services.DeleteAll();
     }
 }
