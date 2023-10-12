@@ -63,7 +63,7 @@ namespace TorchTrackApp.Services
         }
 
 
-        public async Task<TrainingDataModel> GetTrainingRun(int training_run)
+        public async Task<TrainingDataModel> GetTrainingDataFromRuns(int training_run)
         {
             var filter = Builders<TrainingDataModel>.Filter.Eq(u => u.training_run, training_run);
             var training_data = await _training_data_collection.Find(filter).FirstOrDefaultAsync();

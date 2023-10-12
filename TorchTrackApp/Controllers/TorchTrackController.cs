@@ -43,7 +43,7 @@ namespace TorchTrackApp.Controllers
         [HttpGet]
         [Route("GetTrainingDataByRun")]
         public async Task<TrainingDataModel> GetTrainingDataByRun(int training_run) =>
-            await _mongodb_services.GetTrainingRun(training_run);
+            await _mongodb_services.GetTrainingDataFromRuns(training_run);
 
 
         [EnableCors]
