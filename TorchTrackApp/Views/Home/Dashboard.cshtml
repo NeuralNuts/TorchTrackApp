@@ -24,11 +24,17 @@
             <div class="card">
                 <div class="card-body2">
                     <h4 class="card-title">Saved Models</h4>
-                    <form id="uploadForm" action="UploadPage.aspx" method="post" enctype="multipart/form-data">
-                        <input type="file" id="fileInput" name="fileInput" multiple>
-                        <input type="submit" value="Upload">
-                    </form>
-
+                    <div>
+                        <label for="fileInput">Select File(s):</label>
+                        <input class="btn btn-secondary m-2" type="file" id="fileInput" multiple>
+                    </div>
+                    <div>
+                        <label for="fileName">File Name:</label>
+                        <input type="text" readonly="readonly" id="fileName">
+                    </div>
+                    <div>
+                        <button class="btn btn-secondary" id="uploadButton">Upload</button>
+                    </div>
                 </div>
             </div>
         </div>
