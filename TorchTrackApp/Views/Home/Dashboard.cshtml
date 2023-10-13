@@ -5,20 +5,17 @@
 <div class="parent-data-class" , id="parent-data-id">
     <div class="row m-4">
         <!-- Training data Card (with scrollable content) -->
-       
+
         <div class="scrollable-div" id="card-id">
         </div>
 
         <!-- Card 2 -->
         <div class="col-md-4">
             <div class="card">
-                <div class="card-body2">
+                <div class="card-body2" id="analytics-card-body-id">
                     <h4 class="card-title">Training Analytics</h4>
-                    <div class="input-group-append">
-                        <button class="btn btn-outline-secondary" type="button">Add</button>
-                    </div>
-
                 </div>
+                <button class="btn btn-secondary">sync</button>
             </div>
         </div>
 
@@ -27,7 +24,11 @@
             <div class="card">
                 <div class="card-body2">
                     <h4 class="card-title">Saved Models</h4>
-                    <button class="btn btn-outline-secondary">Upload</button>
+                    <form id="uploadForm" action="UploadPage.aspx" method="post" enctype="multipart/form-data">
+                        <input type="file" id="fileInput" name="fileInput" multiple>
+                        <input type="submit" value="Upload">
+                    </form>
+
                 </div>
             </div>
         </div>

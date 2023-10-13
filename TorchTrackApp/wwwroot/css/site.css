@@ -139,3 +139,7 @@ body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
     font-family: Arial;
     color: #ffffff; /* Change the color as desired */
 }
+
+.card-body2 {
+    margin: 5px;
+}

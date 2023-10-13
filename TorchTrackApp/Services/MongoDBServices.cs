@@ -95,5 +95,12 @@ namespace TorchTrackApp.Services
 
             await _training_data_collection.InsertOneAsync(torch_track_model);
         }
+
+        public async Task<TrainingDataModel> GetTrainingDataTotal() 
+        {
+            var model_data = await _training_data_collection.Find(new BsonDocument()).ToListAsync();
+
+            return model_data.Max();
+        }
     }
 }

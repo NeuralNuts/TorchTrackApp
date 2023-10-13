@@ -71,5 +71,12 @@ namespace TorchTrackApp.Controllers
         [Route("DestroyerOfWordls")]
         public async Task DestroyerOfWorlds() =>
             await _mongodb_services.DeleteAll();
-    }
+
+        [EnableCors]
+        [HttpGet]
+        [Route("GetTrainingTotal")]
+        public async Task<TrainingDataModel> GetTrainingTotal() =>
+            await _mongodb_services.GetTrainingDataTotal();
+
+            }
 }

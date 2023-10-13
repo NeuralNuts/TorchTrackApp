@@ -3,6 +3,9 @@ const BASE_URL = "https://localhost:7032/api/TorchTrack/";
 const FETCH_ERROR = "Failed to fetch data: ";
 const HTTP_ERROR = "HTTP error! Status: ";
 
+let total = 0;
+let count = 0
+
 // Async function to fetch training data
 async function get_training_data() {
     const url = `${BASE_URL}GetTraining`;
@@ -16,11 +19,35 @@ async function get_training_data() {
         // Assuming data is an array of training runs
         data.forEach((trainingRun, index) => {
             const parsedData = JSON.parse(trainingRun.model_training_data);
+            const loss = calculateTotal(parsedData); // Calculate the total
+
+            total += loss;
+            count++;
+
             displayTrainingRunData(index + 1, parsedData);
         });
+
+        displayTotalAndAverage();
     } catch (error) {
         console.error(FETCH_ERROR, error.message);
     }
+}
+
+// Function to calculate the total of numeric values
+function calculateTotal(data) {
+    let sum = 0;
+    for (let key in data) {
+        if (data.hasOwnProperty(key)) {
+            const keyData = data[key];
+            for (let subKey in keyData) {
+                if (keyData.hasOwnProperty(subKey) && subKey === 'loss') {
+                    // Assuming 'loss' is the numeric field to sum
+                    sum += parseFloat(keyData[subKey]);
+                }
+            }
+        }
+    }
+    return sum;
 }
 
 // Function to display training run data
@@ -64,6 +91,23 @@ function displayTrainingRunData(trainingRunNumber, data) {
     trainingRunHeading.addEventListener('click', function () {
         trainingDataDiv.style.display = trainingDataDiv.style.display === 'block' ? 'none' : 'block';
     });
+}
+
+// Function to display the total
+function displayTotalAndAverage() {
+    const totalContainer = document.getElementById('analytics-card-body-id');
+    const totalHTML = document.createElement('h5');
+    totalHTML.classList.add('total');
+    totalHTML.textContent = `Total Loss: ${total.toFixed(2)}`; // Display total with two decimal places
+
+    const averageLoss = total / count;
+
+    const averageHTML = document.createElement('h5');
+    averageHTML.classList.add('total');
+    averageHTML.textContent = `Average Loss: ${averageLoss.toFixed(2)}`; // Display average with two decimal places
+
+    totalContainer.appendChild(totalHTML);
+    totalContainer.appendChild(averageHTML);
 }
 
 // Call the async function to fetch and display training data
