@@ -98,3 +98,23 @@ body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
         margin-left: -15rem;
     }
 }
+
+.scrollable-div {
+    max-height: 300px; /* Set a maximum height for the scrollable div */
+    overflow-y: auto; /* Enable vertical scrolling */
+    border: 1px solid #ccc; /* Optional: Add a border for styling */
+    padding: 10px; /* Optional: Add padding for content */
+}
+
+/* Style for collapsible headings */
+.collapsible {
+    cursor: pointer;
+    padding: 10px;
+    background-color: #f1f1f1;
+}
+
+/* Style for content within the collapsible */
+.content {
+    display: none;
+    padding: 10px;
+}
