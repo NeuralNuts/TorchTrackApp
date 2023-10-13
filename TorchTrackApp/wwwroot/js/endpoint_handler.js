@@ -28,7 +28,7 @@ function displayTrainingRunData(trainingRunNumber, data) {
     const container = document.getElementById('card-id');
     const trainingRunHeading = document.createElement('div');
     trainingRunHeading.classList.add('collapsible');
-    trainingRunHeading.innerHTML = `<h2>Training Run Number: ${trainingRunNumber}</h2>`;
+    trainingRunHeading.innerHTML = `<button class="btn btn-secondary">${trainingRunNumber}</button>`;
 
     // Create a collapsible content div for training data
     const trainingDataDiv = document.createElement('div');
@@ -38,13 +38,16 @@ function displayTrainingRunData(trainingRunNumber, data) {
     for (let key in data) {
         if (data.hasOwnProperty(key)) {
             const keyData = data[key];
-            // Display the numeric key and the values within the corresponding object
+            // Display the numeric key with a custom class for styling
             const keyDataHTML = document.createElement('p');
+            keyDataHTML.classList.add('numeric-key');
             keyDataHTML.textContent = `${key}:`;
 
             for (let subKey in keyData) {
                 if (keyData.hasOwnProperty(subKey)) {
+                    // Display the values within the objects with a custom class for styling
                     const subKeyValueHTML = document.createElement('p');
+                    subKeyValueHTML.classList.add('value');
                     subKeyValueHTML.textContent = `${subKey}: ${keyData[subKey]}`;
                     keyDataHTML.appendChild(subKeyValueHTML);
                 }
@@ -63,4 +66,5 @@ function displayTrainingRunData(trainingRunNumber, data) {
     });
 }
 
+// Call the async function to fetch and display training data
 get_training_data();

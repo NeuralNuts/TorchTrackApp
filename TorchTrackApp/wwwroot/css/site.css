@@ -100,21 +100,42 @@ body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
 }
 
 .scrollable-div {
-    max-height: 300px; /* Set a maximum height for the scrollable div */
+    width: 50vh;
+    border-radius: 5px;
+    max-height: 88vh; /* Set a maximum height for the scrollable div */
     overflow-y: auto; /* Enable vertical scrolling */
     border: 1px solid #ccc; /* Optional: Add a border for styling */
     padding: 10px; /* Optional: Add padding for content */
 }
 
 /* Style for collapsible headings */
-.collapsible {
+.collapsible { 
     cursor: pointer;
     padding: 10px;
-    background-color: #f1f1f1;
 }
 
 /* Style for content within the collapsible */
 .content {
     display: none;
     padding: 10px;
+}
+
+/* Style for the numeric keys (e.g., 10, 20, 30) */
+.numeric-key {
+    padding-left: 2px;
+    font-family: Arial;
+    margin: 5px;
+    color: #a71d1d; /* Change the color as desired */
+    border: solid;
+    background-color: #f05f42d7;
+    border-radius: 5px;
+    border-width: 2px;
+    border-color: #F05F42;
+}
+
+/* Style for the values within the objects */
+.value {
+    padding-left: 5px;
+    font-family: Arial;
+    color: #ffffff; /* Change the color as desired */
 }
