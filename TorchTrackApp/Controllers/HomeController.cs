@@ -24,12 +24,12 @@ namespace TorchTrackApp.Controllers
             return View();
         }
 
-        public IActionResult Dashboard() 
+        public IActionResult Training() 
         {
             return View();
         }
 
-        public IActionResult RaspberryPi() 
+        public IActionResult Documentation() 
         {
             return View();
         }

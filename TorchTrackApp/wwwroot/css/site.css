@@ -21,11 +21,41 @@ body {
 .btn {
     background-color: #6200EE;
     color: #ffffff;
+    display: inline-block;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    outline: none; /* Remove default outline */
 }
 
-    .btn:hover {
-        color: #ffffff;
+.btn:hover {
+    background-color: #6200eed2; /* Lighter shade of purple */
+    color: #000000; /* Text color turns to black */
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); 
+}
+
+.btn-secondary {
+    background-color: #6200EE;
+    color: #FFFFFF;
+}
+
+    .btn-secondary:hover {
+        background-color: #6200eed2; /* Lighter shade of purple */
+        color: #000000; /* Text color turns to black */
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); /* Add a subtle shadow */
     }
+
+    .btn-secondary:active {
+        transform: scale(0.95); /* Slightly decrease size when button is pressed */
+        box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2); /* Reduce shadow size */
+    }
+
+.btn:hover {
+    color: #ffffff;
+}
 
 img {
     width: 30px;
@@ -55,7 +85,7 @@ h3 {
 
     .list-group-item:hover {
         transition: 0.5s;
-        background-color: #3700b359;
+        background-color: #2a2a2a45;
         color: #ffffff;
     }
 
@@ -65,7 +95,7 @@ h3 {
 
 .navbar {
     height: 61px;
-    background-color: #6200EE;
+    background: radial-gradient(circle, #6200EE, #7b4cfe);
 }
 
 #sidebar-wrapper {
