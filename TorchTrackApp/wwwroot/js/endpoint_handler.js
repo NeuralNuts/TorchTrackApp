@@ -97,6 +97,7 @@ function displayTrainingRunData(trainingRunNumber, data) {
 function displayTotalAndAverage() {
     const totalContainer = document.getElementById('analytics-card-body-id');
     const totalHTML = document.createElement('h5');
+
     totalHTML.classList.add('total');
     totalHTML.textContent = `Total Loss: ${total.toFixed(2)}`; // Display total with two decimal places
 
@@ -104,7 +105,7 @@ function displayTotalAndAverage() {
 
     const averageHTML = document.createElement('h5');
     averageHTML.classList.add('total');
-    averageHTML.textContent = `Average Loss: ${averageLoss.toFixed(2)}`; // Display average with two decimal places
+    averageHTML.textContent = ` Average Loss: ${averageLoss.toFixed(2)}`; // Display average with two decimal places
 
     totalContainer.appendChild(totalHTML);
     totalContainer.appendChild(averageHTML);

@@ -1,44 +1,28 @@
 ﻿@{
-    ViewData["Title"] = "Dashbaord Page";
+ViewData["Title"] = "Dashbaord Page";
 }
 
 <div class="parent-data-class" , id="parent-data-id">
     <div class="row m-4">
-        <!-- Training data Card (with scrollable content) -->
+        <!-- Card 2 -->
 
+        <h3>Training Analytics: </h3>
+        <div class="scrollable-div" id="analytics-card-body-id">
+
+        </div>
+        
+        <div class="scrollable-div">
+            <h4 class="card-title">Saved Models</h4>
+
+            <input class="btn btn-secondary m-2" type="file" id="fileInput" multiple>
+            <input type="text" readonly="readonly" id="fileName">
+
+            <button class="btn btn-secondary" id="uploadButton">Upload</button>
+            <button class="btn btn-secondary " id="downloadButton">Download</button>
+        </div>
+
+        <!-- Training data Card (with scrollable content) -->
         <div class="scrollable-div" id="card-id">
         </div>
-
-        <!-- Card 2 -->
-        <div class="col-md-4">
-            <div class="card">
-                <div class="card-body2" id="analytics-card-body-id">
-                    <h4 class="card-title">Training Analytics</h4>
-                </div>
-                <button class="btn btn-secondary">sync</button>
-            </div>
-        </div>
-
-        <!-- Card 3 -->
-        <div class="col-md-4">
-            <div class="card">
-                <div class="card-body2">
-                    <h4 class="card-title">Saved Models</h4>
-                    <div>
-                        <label for="fileInput">Select File(s):</label>
-                        <input class="btn btn-secondary m-2" type="file" id="fileInput" multiple>
-                    </div>
-                    <div>
-                        <label for="fileName">File Name:</label>
-                        <input type="text" readonly="readonly" id="fileName">
-                    </div>
-                    
-                    <button class="btn btn-secondary" id="uploadButton">Upload</button>
-                    <button class="btn btn-secondary " id="downloadButton">Download</button>
-
-                </div>
-            </div>
-        </div>
-
     </div>
 </div>

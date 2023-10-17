@@ -19,7 +19,7 @@ body {
 }
 
 .btn {
-    background-color: #F05F42;
+    background-color: #3700B3;
     color: #ffffff;
 }
 
@@ -37,11 +37,13 @@ img {
 
 a {
     cursor: pointer; 
+    color: white;
 }
 
 .list-group-item {
     border: none;
     color: #ffffff;
+    background-color: white;
     list-style: none;
     text-align: center;
     cursor: pointer;
@@ -49,16 +51,22 @@ a {
 
 .list-group-item:hover {
     transition: 0.5s;
-    background-color: #F05F42;
+    background-color: #3700B3;
     color: #ffffff;
+}
+
+.nav-item .nav-link {
+   color: white; 
 }
 
 .navbar {
     height: 61px;
+    background-color: #6200EE;
+
 }
 
 #sidebar-wrapper {
-    box-shadow: rgb(31, 31, 31, 0.55) 4px 11px 20px;
+    box-shadow: rgb(31, 31, 31, 0.55) 4px 11px 5px;
     min-height: 100vh;
     margin-left: -15rem;
     -webkit-transition: margin .25s ease-out;
@@ -100,9 +108,11 @@ body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
 }
 
 .scrollable-div {
-    width: 50vh;
+    display: flex;
+    width: 100%;
+    margin-top: 10px;
     border-radius: 5px;
-    max-height: 88vh; /* Set a maximum height for the scrollable div */
+    max-height: 68vh; /* Set a maximum height for the scrollable div */
     overflow-y: auto; /* Enable vertical scrolling */
     border: 1px solid #ccc; /* Optional: Add a border for styling */
     padding: 10px; /* Optional: Add padding for content */
@@ -124,22 +134,27 @@ body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
 .numeric-key {
     padding-left: 2px;
     font-family: Arial;
-    margin: 5px;
-    color: #a71d1d; /* Change the color as desired */
+    margin: 10px;
+    color: white; /* Change the color as desired */
     border: solid;
-    background-color: #f05f42d7;
+    background-color: white;
     border-radius: 5px;
     border-width: 2px;
-    border-color: #F05F42;
+    border-color: lightgray;
+    box-shadow: rgb(31, 20, 20, 0.55) 4px 11px 15px;
 }
 
 /* Style for the values within the objects */
 .value {
     padding-left: 5px;
     font-family: Arial;
-    color: #ffffff; /* Change the color as desired */
+    color: black; /* Change the color as desired */
 }
 
 .card-body2 {
+    margin: 5px;
+}
+
+h5 {
     margin: 5px;
 }
