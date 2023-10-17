@@ -1,16 +1,16 @@
 html {
-  font-size: 14px;
+    font-size: 14px;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+    html {
+        font-size: 16px;
+    }
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 body {
@@ -19,13 +19,13 @@ body {
 }
 
 .btn {
-    background-color: #3700B3;
+    background-color: #6200EE;
     color: #ffffff;
 }
 
-.btn:hover{
-    color: #ffffff;
-}
+    .btn:hover {
+        color: #ffffff;
+    }
 
 img {
     width: 30px;
@@ -36,7 +36,7 @@ img {
 }
 
 a {
-    cursor: pointer; 
+    cursor: pointer;
     color: white;
 }
 
@@ -53,20 +53,19 @@ h3 {
     cursor: pointer;
 }
 
-.list-group-item:hover {
-    transition: 0.5s;
-    background-color: #3700B3;
-    color: #ffffff;
-}
+    .list-group-item:hover {
+        transition: 0.5s;
+        background-color: #3700b359;
+        color: #ffffff;
+    }
 
 .nav-item .nav-link {
-   color: white; 
+    color: white;
 }
 
 .navbar {
     height: 61px;
     background-color: #6200EE;
-
 }
 
 #sidebar-wrapper {
@@ -123,7 +122,7 @@ body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
 }
 
 /* Style for collapsible headings */
-.collapsible { 
+.collapsible {
     cursor: pointer;
     padding: 10px;
 }
@@ -162,3 +161,4 @@ body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
 h5 {
     margin: 5px;
 }
+

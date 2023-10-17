@@ -1,10 +1,7 @@
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <!-- Uploaded to: SVG Repo, www.svgrepo.com, Transformed by: SVG Repo Mixer Tools -->
-<svg fill="#6002EE" width="800px" height="800px" viewBox="0 0 24 24" role="img" xmlns="http://www.w3.org/2000/svg" stroke="#6002EE">
+<svg fill="#6200EE" width="185px" height="185px" viewBox="-3.2 -3.2 38.40 38.40" xmlns="http://www.w3.org/2000/svg" stroke="#6200EE">
 <g id="SVGRepo_bgCarrier" stroke-width="0"/>
-<g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
-<g id="SVGRepo_iconCarrier">
-<title>PyTorch icon</title>
-<path d="M12.005.04l-7.03 7.03a9.832 9.832 0 0 0 0 13.975 9.833 9.833 0 0 0 13.976 0c3.97-3.887 3.972-10.171.084-13.976l-1.738 1.737c2.895 2.895 2.895 7.608 0 10.503-2.894 2.894-7.608 2.894-10.503 0C3.9 16.414 3.9 11.7 6.794 8.806l4.632-4.631.58-.663zm3.556 3.886a1.323 1.323 0 0 0-1.323 1.323 1.323 1.323 0 0 0 1.323 1.323 1.323 1.323 0 0 0 1.323-1.323 1.323 1.323 0 0 0-1.323-1.323z"/>
-</g>
+<g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round" stroke="#CCCCCC" stroke-width="0.064"/>
+<g id="SVGRepo_iconCarrier"> <path d="M16.005 0.052l-9.369 9.375c-2.491 2.464-3.891 5.819-3.891 9.319s1.4 6.853 3.891 9.317c2.457 2.484 5.817 3.885 9.317 3.885s6.853-1.401 9.312-3.885c5.297-5.188 5.297-13.563 0.115-18.636l-2.317 2.313c3.859 3.859 3.859 10.145 0 14.005-3.86 3.859-10.145 3.859-14.005 0-3.86-3.86-3.86-10.147 0-14.005l6.177-6.172 0.776-0.885zM20.749 5.235c-0.973 0-1.765 0.792-1.765 1.765s0.792 1.76 1.765 1.76c0.975 0 1.761-0.787 1.761-1.76s-0.787-1.765-1.761-1.765z"/> </g>
 </svg>
