@@ -40,6 +40,10 @@ a {
     color: white;
 }
 
+h3 {
+    padding-top: 10px;
+}
+
 .list-group-item {
     border: none;
     color: #ffffff;
@@ -112,7 +116,7 @@ body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
     width: 100%;
     margin-top: 10px;
     border-radius: 5px;
-    max-height: 68vh; /* Set a maximum height for the scrollable div */
+    max-height: 55vh; /* Set a maximum height for the scrollable div */
     overflow-y: auto; /* Enable vertical scrolling */
     border: 1px solid #ccc; /* Optional: Add a border for styling */
     padding: 10px; /* Optional: Add padding for content */
@@ -134,7 +138,7 @@ body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
 .numeric-key {
     padding-left: 2px;
     font-family: Arial;
-    margin: 10px;
+    margin-bottom: 10px;
     color: white; /* Change the color as desired */
     border: solid;
     background-color: white;
