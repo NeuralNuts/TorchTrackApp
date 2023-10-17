@@ -55,7 +55,7 @@ function displayTrainingRunData(trainingRunNumber, data) {
     const container = document.getElementById('card-id');
     const trainingRunHeading = document.createElement('div');
     trainingRunHeading.classList.add('collapsible');
-    trainingRunHeading.innerHTML = `<button class="btn btn-secondary">${trainingRunNumber}</button>`;
+    trainingRunHeading.innerHTML = `<button class="btn btn-secondary">Training Loop: ${trainingRunNumber}</button>`;
 
     // Create a collapsible content div for training data
     const trainingDataDiv = document.createElement('div');
@@ -66,14 +66,14 @@ function displayTrainingRunData(trainingRunNumber, data) {
         if (data.hasOwnProperty(key)) {
             const keyData = data[key];
             // Display the numeric key with a custom class for styling
-            const keyDataHTML = document.createElement('p');
+            const keyDataHTML = document.createElement('h5');
             keyDataHTML.classList.add('numeric-key');
             keyDataHTML.textContent = `${key}:`;
 
             for (let subKey in keyData) {
                 if (keyData.hasOwnProperty(subKey)) {
                     // Display the values within the objects with a custom class for styling
-                    const subKeyValueHTML = document.createElement('p');
+                    const subKeyValueHTML = document.createElement('h4');
                     subKeyValueHTML.classList.add('value');
                     subKeyValueHTML.textContent = `${subKey}: ${keyData[subKey]}`;
                     keyDataHTML.appendChild(subKeyValueHTML);

@@ -24,6 +24,11 @@ namespace TorchTrackApp.Controllers
             return View();
         }
 
+        public IActionResult Models()
+        {
+            return View();
+        }
+
         public IActionResult Training() 
         {
             return View();

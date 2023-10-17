@@ -141,7 +141,7 @@ body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
 }
 
 .scrollable-div {
-    display: flex;
+    display: block;
     width: 100%;
     margin-top: 10px;
     border-radius: 5px;
@@ -181,7 +181,7 @@ body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
 .value {
     padding-left: 5px;
     font-family: Arial;
-    color: black; /* Change the color as desired */
+    color: #000000c2;
 }
 
 .card-body2 {
