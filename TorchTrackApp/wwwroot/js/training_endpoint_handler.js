@@ -73,9 +73,6 @@ async function load_training_bag() {
     }
 }
 
-
-
-
 async function get_training_data() {
     const url = `${BASE_URL}GetTraining`;
     try {
