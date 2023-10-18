@@ -102,5 +102,6 @@ namespace TorchTrackApp.Services
 
             return model_data.Max();
         }
+
     }
 }

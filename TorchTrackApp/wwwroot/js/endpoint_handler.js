@@ -10,11 +10,33 @@ const connection = new signalR.HubConnectionBuilder()
     .withUrl("/myhub")
     .build();
 
-connection.on("ReceiveMessage", (user, message) => {
-    console.log(`${user} says ${message}`);
+
+connection.on("ReceiveTrainingData", (data) => {
+    console.log(data);
+    // Update the UI in real-time with the received data
 });
 
-connection.start().catch(err => console.error(err));
+connection.on("ReceiveMessage", function (user, message) {
+    user = "Zakk";
+    message = "Hello, world!";
+
+    //var li = document.createElement("li");
+    //document.getElementById("messagesList").appendChild(li);
+    //// We can assign user-supplied strings to an element's textContent because it
+    //// is not interpreted as markup. If you're assigning in any other way, you 
+    //// should be aware of possible script injection concerns.
+    //li.textContent = `${user} says ${message}`;
+});
+
+connection.start()
+    .then(() => {
+        console.log("Connected to SignalR hub!");
+        // Here the connection has been established.
+        console.log("Connection ID:", connection.connectionId);
+    })
+    .catch(err => {
+        console.error("Error starting the connection:", err);
+    });
 
 
 //async function load_training_bag() {
