@@ -1,3 +1,4 @@
+"use strict";
 
 const BASE_URL = "https://localhost:7032/api/TorchTrack/";
 const FETCH_ERROR = "Failed to fetch data: ";
@@ -11,79 +12,34 @@ const connection = new signalR.HubConnectionBuilder()
     .build();
 
 
-connection.on("ReceiveTrainingData", (data) => {
+connection.on("ReceiveMessage", (data) => {
     console.log(data);
+    load_training_bag();
     // Update the UI in real-time with the received data
-});
-
-connection.on("ReceiveMessage", function (user, message) {
-    user = "Zakk";
-    message = "Hello, world!";
-
-    //var li = document.createElement("li");
-    //document.getElementById("messagesList").appendChild(li);
-    //// We can assign user-supplied strings to an element's textContent because it
-    //// is not interpreted as markup. If you're assigning in any other way, you 
-    //// should be aware of possible script injection concerns.
-    //li.textContent = `${user} says ${message}`;
 });
 
 connection.start()
     .then(() => {
         console.log("Connected to SignalR hub!");
-        // Here the connection has been established.
         console.log("Connection ID:", connection.connectionId);
     })
     .catch(err => {
         console.error("Error starting the connection:", err);
     });
 
+async function load_training_bag() {
+    const url = `${BASE_URL}GetTraining`;
 
-//async function load_training_bag() {
-//    const url = `${BASE_URL}GetTraining`;
+    const view_bag_result = await fetch("https://localhost:7032/TrainingBag");
+    var htmlResult = await view_bag_result.text();
 
-//    const view_bag_result = await fetch("https://localhost:7032/TrainingBag");
-//    var htmlResult = await view_bag_result.text();
+    document.getElementById("parent-data-id").innerHTML = htmlResult;
 
-//    document.getElementById("parent-data-id").innerHTML = htmlResult;
-
-//    $.ajax({
-//        url: url,
-//        type: 'GET',
-//        dataType: 'json',
-//        success: function (data) {
-//            // Assuming data is an array of training runs
-//            data.forEach((trainingRun, index) => {
-//                const parsedData = JSON.parse(trainingRun.model_training_data);
-//                const loss = calculateTotal(parsedData); // Calculate the total
-
-//                total += loss;
-//                count++;
-
-//                displayTrainingRunData(index + 1, parsedData);
-//            });
-
-//            displayTotalAndAverage();
-//        },
-//        error: function (jqXHR, textStatus, errorThrown) {
-//            console.error(FETCH_ERROR, errorThrown);
-//        }
-//    });
-//}
-
-//$("#cool-btn").click(function (event) {
-//    load_training_bag();
-//})
-
-async function get_training_data() {
-        const url = `${BASE_URL}GetTraining`;
-        try {
-            const response = await fetch(url);
-            if (!response.ok) {
-                throw new Error(`${HTTP_ERROR} ${response.status}`);
-            }
-
-            const data = await response.json();
+    $.ajax({
+        url: url,
+        type: 'GET',
+        dataType: 'json',
+        success: function (data) {
             // Assuming data is an array of training runs
             data.forEach((trainingRun, index) => {
                 const parsedData = JSON.parse(trainingRun.model_training_data);
@@ -96,88 +52,115 @@ async function get_training_data() {
             });
 
             displayTotalAndAverage();
-        } catch (error) {
-            console.error(FETCH_ERROR, error.message);
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            console.error(FETCH_ERROR, errorThrown);
         }
-    }
+    });
+}
 
-// Function to calculate the total of numeric values
+async function get_training_data() {
+    const url = `${BASE_URL}GetTraining`;
+    try {
+        const response = await fetch(url);
+        if (!response.ok) {
+            throw new Error(`${HTTP_ERROR} ${response.status}`);
+        }
+
+        const data = await response.json();
+        // Assuming data is an array of training runs
+        data.forEach((trainingRun, index) => {
+            const parsedData = JSON.parse(trainingRun.model_training_data);
+            const loss = calculateTotal(parsedData); // Calculate the total
+
+            total += loss;
+            count++;
+
+            displayTrainingRunData(index + 1, parsedData);
+        });
+
+        displayTotalAndAverage();
+    } catch (error) {
+        console.error(FETCH_ERROR, error.message);
+    }
+}
+
 function calculateTotal(data) {
-        let sum = 0;
-        for (let key in data) {
-            if (data.hasOwnProperty(key)) {
-                const keyData = data[key];
-                for (let subKey in keyData) {
-                    if (keyData.hasOwnProperty(subKey) && subKey === 'loss') {
-                        // Assuming 'loss' is the numeric field to sum
-                        sum += parseFloat(keyData[subKey]);
-                    }
+    let sum = 0;
+    for (let key in data) {
+        if (data.hasOwnProperty(key)) {
+            const keyData = data[key];
+            for (let subKey in keyData) {
+                if (keyData.hasOwnProperty(subKey) && subKey === 'loss') {
+                    // Assuming 'loss' is the numeric field to sum
+                    sum += parseFloat(keyData[subKey]);
                 }
             }
         }
-        return sum;
     }
+    return sum;
+}
 
 // Function to display training run data
 function displayTrainingRunData(trainingRunNumber, data) {
-        const container = document.getElementById('card-id');
-        const trainingRunHeading = document.createElement('div');
-        trainingRunHeading.classList.add('collapsible');
-        trainingRunHeading.innerHTML = `<button class="btn btn-secondary">Training Loop: ${trainingRunNumber}</button>`;
+    const container = document.getElementById('card-id');
+    const trainingRunHeading = document.createElement('div');
+    trainingRunHeading.classList.add('collapsible');
+    trainingRunHeading.innerHTML = `<button class="btn btn-secondary">Training Loop: ${trainingRunNumber}</button>`;
 
-        // Create a collapsible content div for training data
-        const trainingDataDiv = document.createElement('div');
-        trainingDataDiv.classList.add('content');
+    // Create a collapsible content div for training data
+    const trainingDataDiv = document.createElement('div');
+    trainingDataDiv.classList.add('content');
 
-        // Iterate through the numeric keys (e.g., 10, 20, 30)
-        for (let key in data) {
-            if (data.hasOwnProperty(key)) {
-                const keyData = data[key];
-                // Display the numeric key with a custom class for styling
-                const keyDataHTML = document.createElement('h5');
-                keyDataHTML.classList.add('numeric-key');
-                keyDataHTML.textContent = `${key}:`;
+    // Iterate through the numeric keys (e.g., 10, 20, 30)
+    for (let key in data) {
+        if (data.hasOwnProperty(key)) {
+            const keyData = data[key];
+            // Display the numeric key with a custom class for styling
+            const keyDataHTML = document.createElement('h5');
+            keyDataHTML.classList.add('numeric-key');
+            keyDataHTML.textContent = `${key}:`;
 
-                for (let subKey in keyData) {
-                    if (keyData.hasOwnProperty(subKey)) {
-                        // Display the values within the objects with a custom class for styling
-                        const subKeyValueHTML = document.createElement('h4');
-                        subKeyValueHTML.classList.add('value');
-                        subKeyValueHTML.textContent = `${subKey}: ${keyData[subKey]}`;
-                        keyDataHTML.appendChild(subKeyValueHTML);
-                    }
+            for (let subKey in keyData) {
+                if (keyData.hasOwnProperty(subKey)) {
+                    // Display the values within the objects with a custom class for styling
+                    const subKeyValueHTML = document.createElement('h4');
+                    subKeyValueHTML.classList.add('value');
+                    subKeyValueHTML.textContent = `${subKey}: ${keyData[subKey]}`;
+                    keyDataHTML.appendChild(subKeyValueHTML);
                 }
-
-                trainingDataDiv.appendChild(keyDataHTML);
             }
+
+            trainingDataDiv.appendChild(keyDataHTML);
         }
-
-        trainingRunHeading.appendChild(trainingDataDiv);
-        container.appendChild(trainingRunHeading);
-
-        // Add click event to toggle visibility of training data
-        trainingRunHeading.addEventListener('click', function () {
-            trainingDataDiv.style.display = trainingDataDiv.style.display === 'block' ? 'none' : 'block';
-        });
     }
+
+    trainingRunHeading.appendChild(trainingDataDiv);
+    container.appendChild(trainingRunHeading);
+
+    // Add click event to toggle visibility of training data
+    trainingRunHeading.addEventListener('click', function () {
+        trainingDataDiv.style.display = trainingDataDiv.style.display === 'block' ? 'none' : 'block';
+    });
+}
 
 // Function to display the total
 function displayTotalAndAverage() {
-        const totalContainer = document.getElementById('analytics-card-body-id');
-        const totalHTML = document.createElement('h5');
+    const totalContainer = document.getElementById('analytics-card-body-id');
+    const totalHTML = document.createElement('h5');
 
-        totalHTML.classList.add('total');
-        totalHTML.textContent = `Total Loss: ${total.toFixed(2)}`; // Display total with two decimal places
+    totalHTML.classList.add('total');
+    totalHTML.textContent = `Total Loss: ${total.toFixed(2)}`; // Display total with two decimal places
 
-        const averageLoss = total / count;
+    const averageLoss = total / count;
 
-        const averageHTML = document.createElement('h5');
-        averageHTML.classList.add('total');
-        averageHTML.textContent = ` Average Loss: ${averageLoss.toFixed(2)}`; // Display average with two decimal places
+    const averageHTML = document.createElement('h5');
+    averageHTML.classList.add('total');
+    averageHTML.textContent = ` Average Loss: ${averageLoss.toFixed(2)}`; // Display average with two decimal places
 
-        totalContainer.appendChild(totalHTML);
-        totalContainer.appendChild(averageHTML);
-    }
+    totalContainer.appendChild(totalHTML);
+    totalContainer.appendChild(averageHTML);
+}
 
 // Call the async function to fetch and display training data
 get_training_data();

@@ -54,8 +54,6 @@ namespace TorchTrackApp.Controllers
         {
             await _mongodb_services.CreateModelDataSchema(torch_track_model);
 
-            await _hubContext.Clients.All.SendAsync("ReceiveTrainingData", torch_track_model);
-
             return CreatedAtAction(nameof(GetTorchModels), new { id = torch_track_model.Id }, torch_track_model);
         }
 
@@ -64,7 +62,12 @@ namespace TorchTrackApp.Controllers
         [Route("PostTrainginData")]
         public async Task<IActionResult> PostSingleTrainingData([FromBody] TrainingDataModel training_model)
         {
+            MyHub myHub = new MyHub();
+
             await _mongodb_services.CreateTrainingData(training_model);
+            //await myHub.SendTrainingData(training_model);
+            await _hubContext.Clients.All.SendAsync("ReceiveMessage", training_model);
+
 
             return CreatedAtAction(nameof(GetTrainingData), new { id = training_model.Id }, training_model);
         }
