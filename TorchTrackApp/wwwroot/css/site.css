@@ -231,3 +231,7 @@ nav a {
     margin-right: 10px; /* Adds space between the icon and text */
     vertical-align: middle; /* Aligns the icon with the middle of the text */
 }
+
+#parent-data-id {
+    transition: opacity 0.3s ease-out; /* adjust the duration if needed */
+}

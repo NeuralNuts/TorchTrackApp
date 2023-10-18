@@ -30,34 +30,51 @@ connection.start()
 async function load_training_bag() {
     const url = `${BASE_URL}GetTraining`;
 
-    const view_bag_result = await fetch("https://localhost:7032/TrainingBag");
-    var htmlResult = await view_bag_result.text();
-
-    document.getElementById("parent-data-id").innerHTML = htmlResult;
-
-    $.ajax({
-        url: url,
-        type: 'GET',
-        dataType: 'json',
-        success: function (data) {
-            // Assuming data is an array of training runs
-            data.forEach((trainingRun, index) => {
-                const parsedData = JSON.parse(trainingRun.model_training_data);
-                const loss = calculateTotal(parsedData); // Calculate the total
-
-                total += loss;
-                count++;
-
-                displayTrainingRunData(index + 1, parsedData);
-            });
-
-            displayTotalAndAverage();
-        },
-        error: function (jqXHR, textStatus, errorThrown) {
-            console.error(FETCH_ERROR, errorThrown);
+    try {
+        // Fetch the partial view content
+        const view_bag_result = await fetch("https://localhost:7032/TrainingBag");
+        if (!view_bag_result.ok) {
+            throw new Error('Failed to load TrainingBag partial view');
         }
-    });
+        const htmlResult = await view_bag_result.text();
+
+        // Before updating the content, hide it by setting opacity to 0
+        const parentDataElement = document.getElementById("parent-data-id");
+        parentDataElement.style.opacity = "0";  // Hide the content initially
+        parentDataElement.innerHTML = htmlResult;
+
+        // Fetch the training data
+        const trainingDataResponse = await fetch(url);
+        if (!trainingDataResponse.ok) {
+            throw new Error('Failed to fetch training data');
+        }
+        const trainingData = await trainingDataResponse.json();
+
+        // Process the training data
+        trainingData.forEach((trainingRun, index) => {
+            const parsedData = JSON.parse(trainingRun.model_training_data);
+            const loss = calculateTotal(parsedData);
+
+            total += loss;
+            count++;
+
+            displayTrainingRunData(index + 1, parsedData);
+        });
+
+        displayTotalAndAverage();
+
+        // Trigger the fade-in effect with increased delay
+        setTimeout(() => {
+            parentDataElement.style.opacity = "1";
+        }, 400);  // Increased delay for fade-in
+
+    } catch (error) {
+        console.error(error.message);
+    }
 }
+
+
+
 
 async function get_training_data() {
     const url = `${BASE_URL}GetTraining`;
