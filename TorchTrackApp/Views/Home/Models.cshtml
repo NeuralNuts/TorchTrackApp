@@ -1,22 +1,21 @@
 ﻿@{
     ViewData["Title"] = "Models Page";
 }
+<div class="card m-5" style="border: none;">
+    <h3>Saved Models</h3>
+    <div class="scrollable-div">
+        <input class="btn btn-secondary m-2" type="file" id="fileInput" multiple>
+        <input type="text" readonly="readonly" id="fileName">
 
-<h3>Saved Models</h3>
-<div class="scrollable-div">
-    <input class="btn btn-secondary m-2" type="file" id="fileInput" multiple>
-    <input type="text" readonly="readonly" id="fileName">
+        <button class="btn btn-secondary m-2" id="uploadButton">Upload</button>
+        <button class="btn btn-secondary m-2" id="downloadButton">Download</button>
+    </div>
 
-    <button class="btn btn-secondary m-2" id="uploadButton">Upload</button>
-    <button class="btn btn-secondary m-2" id="downloadButton">Download</button>
-</div>
+    <h2>Architecture</h2>
+    <div id="network-output">
+    </div>
 
-<h2>Architecture</h2>
-<div id="network-output">
-    
-</div>
-
-<h2>Optimizer</h2>
-<div id="json-output">
-    
+    <h2>Optimizer</h2>
+    <div id="json-output">
+    </div>
 </div>
