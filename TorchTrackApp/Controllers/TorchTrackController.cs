@@ -2,12 +2,6 @@
 using TorchTrackApp.Services;
 using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Mvc;
-using MongoDB.Driver;
-using System.Text.Json;
-using Newtonsoft.Json;
-using MongoDB.Bson;
-using MongoDB.Bson.IO;
-using Newtonsoft.Json.Linq;
 
 namespace TorchTrackApp.Controllers
 {
@@ -45,7 +39,6 @@ namespace TorchTrackApp.Controllers
         public async Task<TrainingDataModel> GetTrainingDataByRun(int training_run) =>
             await _mongodb_services.GetTrainingDataFromRuns(training_run);
 
-
         [EnableCors]
         [HttpPost]
         [Route("PostModelData")]
@@ -78,5 +71,5 @@ namespace TorchTrackApp.Controllers
         public async Task<TrainingDataModel> GetTrainingTotal() =>
             await _mongodb_services.GetTrainingDataTotal();
 
-            }
+    }
 }

@@ -2,6 +2,9 @@ using TorchTrackApp.Models;
 using TorchTrackApp.Services;
 using Microsoft.OpenApi.Models;
 using System.Reflection;
+using Microsoft.AspNetCore.WebSockets;
+using TorchTrackApp.Controllers;
+using TorchTrackApp.Sockets;
 
 namespace TorchTrackApp
 {
@@ -19,6 +22,7 @@ namespace TorchTrackApp
             builder.Services.AddSingleton<MongoDBServices>();
             builder.Services.AddEndpointsApiExplorer();
             builder.Services.AddControllersWithViews();
+            builder.Services.AddSignalR();
             builder.Services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc(
@@ -64,6 +68,11 @@ namespace TorchTrackApp
             app.UseSwagger();
             app.UseSwaggerUI();
 
+            //app.UseEndpoints(endpoints =>
+            //{
+            //    endpoints.MapHub<MyHub>("/myhub");
+            //});
+
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseRouting();
@@ -77,9 +86,17 @@ namespace TorchTrackApp
             });
             app.UseAuthorization();
 
-            app.MapControllerRoute(
-                name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapHub<MyHub>("/myhub");
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}");
+            });
+
+            //app.MapControllerRoute(
+            //    name: "default",
+            //    pattern: "{controller=Home}/{action=Index}/{id?}");
 
             app.Run();
             #endregion

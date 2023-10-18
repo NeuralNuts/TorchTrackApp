@@ -19,7 +19,7 @@ body {
 }
 
 .btn {
-    background-color: #6200EE;
+    background-color: transparent;
     color: #ffffff;
     display: inline-block;
     padding: 10px 20px;
@@ -31,11 +31,11 @@ body {
     outline: none; /* Remove default outline */
 }
 
-.btn:hover {
-    background-color: #6200eed2; /* Lighter shade of purple */
-    color: #000000; /* Text color turns to black */
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2); 
-}
+    .btn:hover {
+        background-color: #6200eed2; /* Lighter shade of purple */
+        color: #000000; /* Text color turns to black */
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
 
 .btn-secondary {
     background-color: #6200EE;
@@ -192,3 +192,42 @@ h5 {
     margin: 5px;
 }
 
+header, footer {
+    background-color: white;
+    color: black;
+    padding: 1rem;
+    text-align: center;
+}
+
+nav a {
+    margin: 0 15px;
+    color: white;
+    text-decoration: none;
+}
+
+.hero {
+    padding: 100px 0;
+    text-align: center;
+    background-color: white;
+}
+
+.features {
+    display: flex;
+    justify-content: space-around;
+    padding: 50px 0;
+}
+
+.feature-card {
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    background: white;
+    width: 30%;
+    text-align: center;
+}
+
+.title-icon {
+    height: 30px; /* Adjusts the height of the icon */
+    width: 30px; /* Adjusts the width of the icon */
+    margin-right: 10px; /* Adds space between the icon and text */
+    vertical-align: middle; /* Aligns the icon with the middle of the text */
+}
