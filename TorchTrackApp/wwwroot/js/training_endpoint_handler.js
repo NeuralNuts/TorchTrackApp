@@ -32,7 +32,7 @@ async function load_training_bag() {
 
     try {
         // Fetch the partial view content
-        const view_bag_result = await fetch("https://localhost:7032/TrainingBag");
+        const view_bag_result = await fetch("https://torchtrackapp.azurewebsites.net/TrainingBag");
         if (!view_bag_result.ok) {
             throw new Error('Failed to load TrainingBag partial view');
         }
@@ -44,7 +44,7 @@ async function load_training_bag() {
         parentDataElement.innerHTML = htmlResult;
 
         // Fetch the training data
-        const trainingDataResponse = await fetch(url);
+        const trainingDataResponse = await fetch("https://torchtrackapp.azurewebsites.net/api/TorchTrack/GetTraining");
         if (!trainingDataResponse.ok) {
             throw new Error('Failed to fetch training data');
         }
@@ -76,7 +76,7 @@ async function load_training_bag() {
 async function get_training_data() {
     const url = `${BASE_URL}GetTraining`;
     try {
-        const response = await fetch(url);
+        const response = await fetch("https://torchtrackapp.azurewebsites.net/api/TorchTrack/GetTraining");
         if (!response.ok) {
             throw new Error(`${HTTP_ERROR} ${response.status}`);
         }

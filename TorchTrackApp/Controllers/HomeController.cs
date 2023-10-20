@@ -47,6 +47,7 @@ namespace TorchTrackApp.Controllers
             return View();
         }
 
+        [EnableCors]
         [Route("TrainingBag")]
         [HttpGet]
         public async Task<IActionResult> TrainingBag()

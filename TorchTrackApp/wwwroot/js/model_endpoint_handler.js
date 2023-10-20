@@ -1,5 +1,6 @@
 ﻿
-const BASE_URL = "https://localhost:7032/api/TorchTrack/";
+//const BASE_URL = "https://localhost:7032/api/TorchTrack/";
+const BASE_URL = "https://torchtrackapp.azurewebsites.net/api/TorchTrack/";
 const FETCH_ERROR = "Failed to fetch data: ";
 const HTTP_ERROR = "HTTP error! Status: ";
 
