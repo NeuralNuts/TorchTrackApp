@@ -8,12 +8,13 @@
     <h1 style="color: black;">TorchTrack Library</h1>
 </header>
 
-<div id="wrapper" style="margin: 50px;">
-    <nav>
+<div id="wrapper" style="margin: 50px; height: 700px; position: relative;">
+    <nav class="doc-sidebar">
         <ul>
-            <li><a href="#intro" class="active">Introduction</a></li>
+            <li><a href="#intro">Introduction</a></li>
             <li><a href="#install">Installation</a></li>
             <li><a href="#usage">Usage</a></li>
+            <li><a href="#example">Example</a></li>
             <li><a href="#api">API References</a></li>
             <!-- Add more links as needed -->
         </ul>
@@ -69,10 +70,119 @@
 
             <p>After you run your python file the data will be sent to the TorchTrack app</p>
 
-            <h2>Example</h2>
+            <h2 id="example">Example</h2>
+            <p>This is an exaple of using the TorchTrack lib on a simple Pytorch model</p>
 
-            <br/>
-
+            <code>
+                <span class="keyword">import</span> torch
+                <br>
+                <span class="keyword">import</span> torch.nn <span class="keyword">as</span> nn
+                <br>
+                <span class="keyword">from</span> torch_track <span class="keyword">import</span> track_functions
+                <br>
+                <span class="keyword">import</span> torch.optim <span class="keyword">as</span> optim
+                <br>
+                <span class="keyword">from</span> sklearn.datasets <span class="keyword">import</span> load_iris
+                <br>
+                <span class="keyword">from</span> sklearn.model_selection <span class="keyword">import</span> train_test_split
+                <br>
+                <span class="keyword">from</span> sklearn.preprocessing <span class="keyword">import</span> StandardScaler
+                <br><br>
+                iris = load_iris()
+                <br>
+                X, y = iris.data, iris.target
+                <br><br>
+                X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
+                <br><br>
+                scaler = StandardScaler()
+                <br>
+                X_train = scaler.<span class="function">fit_transform</span>(X_train)
+                <br>
+                X_test = scaler.<span class="function">transform</span>(X_test)
+                <br><br>
+                X_train = torch.<span class="function">tensor</span>(X_train, dtype=torch.float32)
+                <br>
+                y_train = torch.<span class="function">tensor</span>(y_train, dtype=torch.long)
+                <br>
+                X_test = torch.<span class="function">tensor</span>(X_test, dtype=torch.float32)
+                <br>
+                y_test = torch.<span class="function">tensor</span>(y_test, dtype=torch.long)
+                <br><br>
+                <span class="keyword">class</span> MultiClassClassifier(nn.Module):
+                <br>
+                &nbsp;&nbsp;<span class="keyword">def</span> __init__(self, input_size, hidden_size, num_classes):
+                <br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">super</span>(MultiClassClassifier, self).__init__()
+                <br>
+                &nbsp;&nbsp;&nbsp;&nbsp;self.fc1 = nn.Linear(input_size, hidden_size)
+                <br>
+                &nbsp;&nbsp;&nbsp;&nbsp;self.fc2 = nn.Linear(hidden_size, num_classes)
+                <br>
+                <br>
+                &nbsp;&nbsp;<span class="keyword">def</span> forward(self, x):
+                <br>
+                &nbsp;&nbsp;&nbsp;&nbsp;x = torch.<span class="function">relu</span>(self.fc1(x))
+                <br>
+                &nbsp;&nbsp;&nbsp;&nbsp;x = self.fc2(x)
+                <br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="keyword">return</span> x
+                <br><br>
+                model = MultiClassClassifier(input_size=X_train.shape[1], hidden_size=16, num_classes=3)
+                <br>
+                criterion = nn.CrossEntropyLoss()
+                <br>
+                optimizer = optim.SGD(model.<span class="function">parameters</span>(), lr=0.1)
+                <br><br>
+                num_epochs = 100
+                <br><br>
+                training_arr = {}
+                <br><br>
+                <span class="keyword">for</span> epoch <span class="keyword">in</span> <span class="keyword">range</span>(num_epochs):
+                <br>
+                &nbsp;&nbsp;outputs = model(X_train)
+                <br>
+                &nbsp;&nbsp;loss = criterion(outputs, y_train)
+                <br><br>
+                &nbsp;&nbsp;optimizer.<span class="function">zero_grad</span>()
+                <br>
+                &nbsp;&nbsp;loss.<span class="function">backward</span>()
+                <br>
+                &nbsp;&nbsp;optimizer.<span class="function">step</span>()
+                <br><br>
+                &nbsp;&nbsp;<span class="keyword">if</span> (epoch+1) % 10 == 0:
+                <br>
+                &nbsp;&nbsp;&nbsp;&nbsp;<span class="function">print</span>(f'Epoch [{epoch+1}/{num_epochs}], Loss: {loss.item():.4f}')
+                <br>
+                &nbsp;&nbsp;&nbsp;&nbsp;training_arr[epoch+1] = {
+                <br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"epochs": epoch+1,
+                <br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"num_epochs": num_epochs,
+                <br>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"loss": loss.item()
+                <br>
+                &nbsp;&nbsp;&nbsp;&nbsp;}
+                <br><br>
+                track_model = track_functions.TorchModelData("CNN", model, optimizer.<span class="function">state_dict</span>())
+                <br>
+                track_training = track_functions.TorchTrainingData(training_arr)
+                <br><br>
+                track_training.<span class="function">save_training_data</span>()
+                <br>
+                track_model.<span class="function">save_model_data</span>()
+                <br><br>
+                model.<span class="function">eval</span>()
+                <br><br>
+                <span class="keyword">with</span> torch.no_grad():
+                <br>
+                &nbsp;&nbsp;test_outputs = model(X_test)
+                <br>
+                &nbsp;&nbsp;_, predicted = torch.<span class="function">max</span>(test_outputs, 1)
+                <br>
+                &nbsp;&nbsp;accuracy = (predicted == y_test).<span class="function">sum</span>().item() / len(y_test)
+                <br>
+                &nbsp;&nbsp;<span class="function">print</span>('Test Accuracy: {:.2f}%'.<span class="function">format</span>(accuracy * 100))
+            </code>
         </section>
 
         <section id="api">

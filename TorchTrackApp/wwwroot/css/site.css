@@ -64,7 +64,6 @@ img {
 }
 
 #wrapper {
-
     overflow-x: hidden;
 }
 
@@ -332,6 +331,14 @@ h1 {
         text-align: center;
     }
 
+.doc-sidebar {
+    position: -webkit-sticky; /* For Safari */
+    position: sticky;
+    border-right: solid;
+    border-color: rgba(0, 0, 0, 0.2);
+    top: 0; /* Stick to the top of the viewport */
+}
+
     nav a {
         margin: 0 15px;
         color: white;
@@ -403,5 +410,27 @@ code {
     /* Python number styling */
     code .number {
         color: #d19a66; /* Orange */
+    }
+
+/* Width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 5px;
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 5px;
+}
+
+    /* Handle on hover */
+    ::-webkit-scrollbar-thumb:hover {
+        background: #555;
     }
 
