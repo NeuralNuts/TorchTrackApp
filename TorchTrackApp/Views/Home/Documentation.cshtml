@@ -3,45 +3,12 @@
 }
 
 <title>TorchTrack Library Documentation</title>
-<style>
-    #wrapper {
-        display: flex;
-        flex-direction: row;
-    }
-
-    nav ul {
-        list-style-type: none;
-        padding: 0;
-    }
-  
-    nav ul li {
-        margin: 10px 0;
-    }
-
-    nav ul li a {
-        text-decoration: none;
-        color: #333;
-    }
-
-    nav ul li a:hover, nav ul li a.active {
-        text-decoration: underline;
-    }
-
-    main {
-        flex: 3;
-        padding: 20px;
-    }
-
-    h2, h3 {
-        color: #7b4cfe;
-    }
-</style>
 
 <header>
-    <h1>TorchTrack Library</h1>
+    <h1 style="color: black;">TorchTrack Library</h1>
 </header>
 
-<div id="wrapper">
+<div id="wrapper" style="margin: 50px;">
     <nav>
         <ul>
             <li><a href="#intro" class="active">Introduction</a></li>
@@ -54,30 +21,62 @@
 
     <main>
         <section id="intro">
-            <h2>Introduction</h2>
-            <p>Welcome to our code library. Here you'll find comprehensive guides and documentation to help you start working with our library as quickly as possible.</p>
+            <h1>Introduction</h1>
+
+            <h3>Overview</h3>
+            <p><strong>TorchTrack</strong> is a sophisticated Python library tailored for the PyTorch community. Its primary objective is to facilitate efficient and systematic tracking of both model and training data. As deep learning models and their associated training regimens grow in complexity, the importance of structured and streamlined data management becomes paramount. TorchTrack aims to address this need, bridging the gap between development and analytics.</p>
+
+            <h3>Features</h3>
+            <ul>
+                <li><strong>Automated Data Collection</strong>: TorchTrack reduces manual labor by automatically logging model architectures, hyperparameters, and training metrics.</li>
+                <li><strong>Interoperability</strong>: Designed to be compatible with a wide range of PyTorch versions and associated libraries, ensuring that regardless of your setup, TorchTrack can be integrated seamlessly.</li>
+                <li><strong>Visualization Tools</strong>: The library comes equipped with utilities that allow users to visualize training progress, model performance, and other essential metrics, promoting more informed decision-making.</li>
+                <li><strong>Customization</strong>: Recognizing that no two projects are identical, TorchTrack is built to be flexible. Users can customize what data they wish to track, how it's presented, and where it's stored.</li>
+                <li><strong>Scalability</strong>: From personal projects to industrial-scale applications, TorchTrack is engineered to handle varying data loads without compromising on performance.</li>
+            </ul>
+
+            <h3>Getting Started</h3>
+            <p>Integration of TorchTrack into your PyTorch project is straightforward. Follow our step-by-step guide in the 'Installation' and 'Quick Start' sections to set up and start benefiting from TorchTrack's capabilities.</p>
+            <p>We hope that TorchTrack enhances your PyTorch development experience. Your feedback and contributions are invaluable, helping us shape the future of efficient deep learning data management.</p>
         </section>
 
         <section id="install">
-            <h2>Installation</h2>
-            <p>Follow the steps below to install the library:</p>
-            <code>npm install your-library-name</code>
+            <h1>Installation</h1>
+            <kbd>pip install TorchTrack</kbd>
         </section>
+        <br />
 
         <section id="usage">
-            <h2>Usage</h2>
-            <p>Once installed, you can use the library like this:</p>
-            <pre>
+            <h1>Usage</h1>
+            <p>Import TorchTrack like this:</p>
             <code>
-                    int main(){
+                <span class="keyword">from</span> torch_track <span class="keyword">import</span> track_functions
+            </code>
 
-                    }
-                </code>
-            </pre>
+            <p>Instantiate "track_functions" classes with your data: </p>
+            <code>
+                track_model = <span class="keyword">track_functions</span>.<span class="function">TorchModelData</span>(<span class="string">"Model Name"</span>, model, optimizer.<span class="function">state_dict</span>())
+                <br>
+                track_training = <span class="keyword">track_functions</span>.<span class="function">TorchTrainingData</span>(training_data)
+            </code>
+
+            <p>Use these funcitons to save your model data and training data</p>
+            <code>
+                track_training.<span class="function">save_training_data</span>()
+                <br>
+                track_model.<span class="function">save_model_data</span>()
+            </code>
+
+            <p>After you run your python file the data will be sent to the TorchTrack app</p>
+
+            <h2>Example</h2>
+
+            <br/>
+
         </section>
 
         <section id="api">
-            <h2>API References</h2>
+            <h1>API References</h1>
             <h3>FunctionOne</h3>
             <p>Description for FunctionOne.</p>
             <h3>FunctionTwo</h3>

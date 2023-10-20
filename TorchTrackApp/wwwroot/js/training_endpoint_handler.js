@@ -1,71 +1,66 @@
 "use strict";
 
-const BASE_URL = "https://localhost:7032/api/TorchTrack/";
+const API_URL = "https://torchtrackapp.azurewebsites.net/api/TorchTrack/";
+const BASE_URL = "https://torchtrackapp.azurewebsites.net/";
 const FETCH_ERROR = "Failed to fetch data: ";
 const HTTP_ERROR = "HTTP error! Status: ";
 
 let total = 0;
 let count = 0
 
-const connection = new signalR.HubConnectionBuilder()
+const CONNECTION = new signalR.HubConnectionBuilder()
     .withUrl("/myhub")
     .build();
 
-
-connection.on("ReceiveMessage", (data) => {
+CONNECTION.on("ReceiveMessage", (data) => {
     console.log(data);
     load_training_bag();
-    // Update the UI in real-time with the received data
 });
 
-connection.start()
+CONNECTION.start()
     .then(() => {
         console.log("Connected to SignalR hub!");
-        console.log("Connection ID:", connection.connectionId);
+        console.log("Connection ID:", CONNECTION.connectionId);
     })
     .catch(err => {
         console.error("Error starting the connection:", err);
     });
 
 async function load_training_bag() {
-    const url = `${BASE_URL}GetTraining`;
+    const URL = `${API_URL}GetTraining`;
+    const TRAINING_BAG_URL = `${BASE_URL}TrainingBag`;
 
     try {
-        // Fetch the partial view content
-        const view_bag_result = await fetch("https://torchtrackapp.azurewebsites.net/TrainingBag");
-        if (!view_bag_result.ok) {
+        const VIEW_BAG_RESULT = await fetch(URL);
+
+        if (!VIEW_BAG_RESULT.ok) {
             throw new Error('Failed to load TrainingBag partial view');
         }
-        const htmlResult = await view_bag_result.text();
+        const HTML_RESULT = await VIEW_BAG_RESULT.text();
+        const PARENT_DATA_ELEMENT = document.getElementById("parent-data-id");
 
-        // Before updating the content, hide it by setting opacity to 0
-        const parentDataElement = document.getElementById("parent-data-id");
-        parentDataElement.style.opacity = "0";  // Hide the content initially
-        parentDataElement.innerHTML = htmlResult;
+        PARENT_DATA_ELEMENT.style.opacity = "0"; 
+        PARENT_DATA_ELEMENT.innerHTML = HTML_RESULT;
 
-        // Fetch the training data
-        const trainingDataResponse = await fetch("https://torchtrackapp.azurewebsites.net/api/TorchTrack/GetTraining");
-        if (!trainingDataResponse.ok) {
+        const TRAINING_DATA_RESPONSE = await fetch(TRAINING_BAG_URL);
+
+        if (!TRAINING_DATA_RESPONSE.ok) {
             throw new Error('Failed to fetch training data');
         }
-        const trainingData = await trainingDataResponse.json();
+        const TRAINING_DATA = await TRAINING_DATA_RESPONSE.json();
 
-        // Process the training data
-        trainingData.forEach((trainingRun, index) => {
-            const parsedData = JSON.parse(trainingRun.model_training_data);
-            const loss = calculateTotal(parsedData);
+        TRAINING_DATA.forEach((trainingRun, index) => {
+            const PARSED_DATA = JSON.parse(trainingRun.model_training_data);
+            const LOSS = calculateTotal(PARSED_DATA);
 
-            total += loss;
+            total += LOSS;
             count++;
 
-            displayTrainingRunData(index + 1, parsedData);
+            displayTrainingRunData(index + 1, PARSED_DATA);
         });
-
         displayTotalAndAverage();
-
-        // Trigger the fade-in effect with increased delay
         setTimeout(() => {
-            parentDataElement.style.opacity = "1";
+            PARENT_DATA_ELEMENT.style.opacity = "1";
         }, 400);  // Increased delay for fade-in
 
     } catch (error) {
@@ -74,23 +69,24 @@ async function load_training_bag() {
 }
 
 async function get_training_data() {
-    const url = `${BASE_URL}GetTraining`;
+    const URL = `${API_URL}GetTraining`;
+
     try {
-        const response = await fetch("https://torchtrackapp.azurewebsites.net/api/TorchTrack/GetTraining");
-        if (!response.ok) {
-            throw new Error(`${HTTP_ERROR} ${response.status}`);
+        const RESPONSE = await fetch(URL);
+
+        if (!RESPONSE.ok) {
+            throw new Error(`${HTTP_ERROR} ${RESPONSE.status}`);
         }
+        const DATA = await RESPONSE.json();
 
-        const data = await response.json();
-        // Assuming data is an array of training runs
-        data.forEach((trainingRun, index) => {
-            const parsedData = JSON.parse(trainingRun.model_training_data);
-            const loss = calculateTotal(parsedData); // Calculate the total
+        DATA.forEach((trainingRun, index) => {
+            const PARSED_DATA = JSON.parse(trainingRun.model_training_data);
+            const LOSS = calculateTotal(PARSED_DATA); // Calculate the total
 
-            total += loss;
+            total += LOSS;
             count++;
 
-            displayTrainingRunData(index + 1, parsedData);
+            displayTrainingRunData(index + 1, PARSED_DATA);
         });
 
         displayTotalAndAverage();
@@ -101,12 +97,13 @@ async function get_training_data() {
 
 function calculateTotal(data) {
     let sum = 0;
+
     for (let key in data) {
         if (data.hasOwnProperty(key)) {
             const keyData = data[key];
+
             for (let subKey in keyData) {
                 if (keyData.hasOwnProperty(subKey) && subKey === 'loss') {
-                    // Assuming 'loss' is the numeric field to sum
                     sum += parseFloat(keyData[subKey]);
                 }
             }
@@ -115,66 +112,61 @@ function calculateTotal(data) {
     return sum;
 }
 
-// Function to display training run data
 function displayTrainingRunData(trainingRunNumber, data) {
-    const container = document.getElementById('card-id');
-    const trainingRunHeading = document.createElement('div');
-    trainingRunHeading.classList.add('collapsible');
-    trainingRunHeading.innerHTML = `<button class="btn btn-secondary">Training Loop: ${trainingRunNumber}</button>`;
+    const CONTAINER = document.getElementById('card-id');
+    const TRAINING_RUN_HEADING = document.createElement('div');
 
-    // Create a collapsible content div for training data
-    const trainingDataDiv = document.createElement('div');
-    trainingDataDiv.classList.add('content');
+    TRAINING_RUN_HEADING.classList.add('collapsible');
+    TRAINING_RUN_HEADING.innerHTML = `<button class="btn btn-secondary">Training Loop: ${trainingRunNumber}</button>`;
 
-    // Iterate through the numeric keys (e.g., 10, 20, 30)
+    const TRAINING_DATA_DIV = document.createElement('div');
+
+    TRAINING_DATA_DIV.classList.add('content');
+
     for (let key in data) {
         if (data.hasOwnProperty(key)) {
-            const keyData = data[key];
-            // Display the numeric key with a custom class for styling
-            const keyDataHTML = document.createElement('h5');
-            keyDataHTML.classList.add('numeric-key');
-            keyDataHTML.textContent = `${key}:`;
+            const KEY_DATA = data[key];
+            const KEY_DATA_HTML = document.createElement('h5');
 
-            for (let subKey in keyData) {
-                if (keyData.hasOwnProperty(subKey)) {
-                    // Display the values within the objects with a custom class for styling
-                    const subKeyValueHTML = document.createElement('h4');
-                    subKeyValueHTML.classList.add('value');
-                    subKeyValueHTML.textContent = `${subKey}: ${keyData[subKey]}`;
-                    keyDataHTML.appendChild(subKeyValueHTML);
+            KEY_DATA_HTML.classList.add('numeric-key');
+            KEY_DATA_HTML.textContent = `${key}:`;
+
+            for (let subKey in KEY_DATA) {
+                if (KEY_DATA.hasOwnProperty(subKey)) {
+                    const SUB_KEY_VALUE_HTML = document.createElement('h4');
+
+                    SUB_KEY_VALUE_HTML.classList.add('value');
+                    SUB_KEY_VALUE_HTML.textContent = `${subKey}: ${KEY_DATA[subKey]}`;
+                    KEY_DATA_HTML.appendChild(SUB_KEY_VALUE_HTML);
                 }
             }
-
-            trainingDataDiv.appendChild(keyDataHTML);
+            TRAINING_DATA_DIV.appendChild(KEY_DATA_HTML);
         }
     }
+    TRAINING_RUN_HEADING.appendChild(TRAINING_DATA_DIV);
+    CONTAINER.appendChild(TRAINING_RUN_HEADING);
 
-    trainingRunHeading.appendChild(trainingDataDiv);
-    container.appendChild(trainingRunHeading);
-
-    // Add click event to toggle visibility of training data
-    trainingRunHeading.addEventListener('click', function () {
-        trainingDataDiv.style.display = trainingDataDiv.style.display === 'block' ? 'none' : 'block';
+    TRAINING_RUN_HEADING.addEventListener('click', function () {
+        TRAINING_DATA_DIV.style.display = TRAINING_DATA_DIV.style.display === 'block' ? 'none' : 'block';
     });
 }
 
-// Function to display the total
 function displayTotalAndAverage() {
-    const totalContainer = document.getElementById('analytics-card-body-id');
-    const totalHTML = document.createElement('h5');
+    const TOTAL_CONTAINER = document.getElementById('analytics-card-body-id');
+    const TOTAL_HTML = document.createElement('h5');
 
-    totalHTML.classList.add('total');
-    totalHTML.textContent = `Total Loss: ${total.toFixed(2)}`; // Display total with two decimal places
+    TOTAL_HTML.classList.add('total');
+    TOTAL_HTML.textContent = `Total Loss: ${total.toFixed(2)}`;
 
-    const averageLoss = total / count;
+    const AVERAGE_LOSS = total / count;
 
-    const averageHTML = document.createElement('h5');
-    averageHTML.classList.add('total');
-    averageHTML.textContent = ` Average Loss: ${averageLoss.toFixed(2)}`; // Display average with two decimal places
+    const AVERAGE_HTML = document.createElement('h5');
 
-    totalContainer.appendChild(totalHTML);
-    totalContainer.appendChild(averageHTML);
+    AVERAGE_HTML.classList.add('total');
+    AVERAGE_HTML.textContent = ` Average Loss: ${AVERAGE_LOSS.toFixed(2)}`;
+
+    TOTAL_CONTAINER.appendChild(TOTAL_HTML);
+    TOTAL_CONTAINER.appendChild(AVERAGE_HTML);
 }
 
-// Call the async function to fetch and display training data
 get_training_data();

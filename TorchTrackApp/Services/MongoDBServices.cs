@@ -47,30 +47,6 @@ namespace TorchTrackApp.Services
             return training_data;
         }
         
-        public async Task<List<TrainingRunModel>> GetTrainingRun()
-        {
-            var projection = Builders<TrainingDataModel>
-                .Projection
-                .Include(u => u.training_run)
-                .Exclude(u => u.Id);
-
-            var training_data = await _training_data_collection
-                .Find(new BsonDocument())
-                .Project<TrainingRunModel>(projection)
-                .ToListAsync();
-
-            return training_data;
-        }
-
-
-        public async Task<TrainingDataModel> GetTrainingDataFromRuns(int training_run)
-        {
-            var filter = Builders<TrainingDataModel>.Filter.Eq(u => u.training_run, training_run);
-            var training_data = await _training_data_collection.Find(filter).FirstOrDefaultAsync();
-
-            return training_data;
-        }
-
         public async Task DeleteAll()
         {
             await _training_data_collection.DeleteManyAsync(new BsonDocument()); 
@@ -95,13 +71,5 @@ namespace TorchTrackApp.Services
 
             await _training_data_collection.InsertOneAsync(torch_track_model);
         }
-
-        public async Task<TrainingDataModel> GetTrainingDataTotal() 
-        {
-            var model_data = await _training_data_collection.Find(new BsonDocument()).ToListAsync();
-
-            return model_data.Max();
-        }
-
     }
 }

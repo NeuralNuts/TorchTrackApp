@@ -14,13 +14,11 @@ namespace TorchTrackApp.Controllers
         private readonly MongoDBServices _mongodb_services;
         private readonly IHubContext<MyHub> _hubContext;
 
-
         public TorchTrackController(MongoDBServices mongodb_services, IHubContext<MyHub> hubContext)
         {
             _mongodb_services = mongodb_services;
             _hubContext = hubContext;
         } 
-      
 
         [EnableCors]
         [HttpGet]
@@ -33,19 +31,6 @@ namespace TorchTrackApp.Controllers
         [Route("GetTraining")]
         public async Task<List<TrainingDataModel>> GetTrainingData() =>
             await _mongodb_services.GetTrainingData();
-
-        [EnableCors]
-        [HttpGet]
-        [Route("GetTrainingByTrainingRun")]
-        public async Task<List<TrainingRunModel>> GetTrainingDataByTrainingRun() =>
-            await _mongodb_services.GetTrainingRun();
-
-
-        [EnableCors]
-        [HttpGet]
-        [Route("GetTrainingDataByRun")]
-        public async Task<TrainingDataModel> GetTrainingDataByRun(int training_run) =>
-            await _mongodb_services.GetTrainingDataFromRuns(training_run);
 
         [EnableCors]
         [HttpPost]
@@ -77,12 +62,6 @@ namespace TorchTrackApp.Controllers
         [Route("DestroyerOfWordls")]
         public async Task DestroyerOfWorlds() =>
             await _mongodb_services.DeleteAll();
-
-        [EnableCors]
-        [HttpGet]
-        [Route("GetTrainingTotal")]
-        public async Task<TrainingDataModel> GetTrainingTotal() =>
-            await _mongodb_services.GetTrainingDataTotal();
 
     }
 }

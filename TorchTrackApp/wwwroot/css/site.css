@@ -18,6 +18,8 @@ body {
     /*margin-bottom: 60px;*/
 }
 
+
+
 .btn {
     background-color: transparent;
     color: #ffffff;
@@ -62,6 +64,7 @@ img {
 }
 
 #wrapper {
+
     overflow-x: hidden;
 }
 
@@ -285,3 +288,120 @@ nav a {
 .layer-details {
     color: #888;
 }
+
+ #wrapper {
+        display: flex;
+        flex-direction: row;
+    }
+
+    nav ul {
+        list-style-type: none;
+        padding: 0;
+    }
+  
+    nav ul li {
+        margin: 10px 0;
+    }
+
+    nav ul li a {
+        text-decoration: none;
+        color: #333;
+    }
+
+    nav ul li a:hover, nav ul li a.active {
+        text-decoration: underline;
+    }
+
+    main {
+        flex: 3;
+        padding: 20px;
+    }
+
+    h2, h3 {
+        color: #7b4cfe;
+    }
+
+h1 {
+    color: #7b4cfe;
+}
+
+.hero-page-header, footer {
+        background-color: white;
+        color: black;
+        padding: 1rem;
+        text-align: center;
+    }
+
+    nav a {
+        margin: 0 15px;
+        color: white;
+        text-decoration: none;
+    }
+
+    .hero {
+        padding: 100px 0;
+        text-align: center;
+        background-color: white;
+    }
+
+    .features {
+        display: flex;
+        justify-content: space-around;
+        padding: 50px 0;
+    }
+
+    .feature-card {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        background: white;
+        width: 30%;
+        text-align: center;
+    }
+
+    .title-icon {
+        height: 30px; /* Adjusts the height of the icon */
+        width: 30px; /* Adjusts the width of the icon */
+        margin-right: 10px; /* Adds space between the icon and text */
+        vertical-align: middle; /* Aligns the icon with the middle of the text */
+    }
+
+/* Base styling for code block */
+code {
+    display: block;
+    padding: 16px;
+    margin: 16px 0;
+    overflow-x: auto;
+    font-family: Arial, monospace;
+    font-size: 15px;
+    line-height: 1.5;
+    background-color: #282c34; /* Dark background */
+    color: #ffffff; /* White text for main content */
+    border-radius: 4px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+
+    /* Python keyword styling */
+    code .keyword {
+        color: #c678dd; /* Purple */
+    }
+
+    /* Python string styling */
+    code .string {
+        color: #98c379; /* Green */
+    }
+
+    /* Python comment styling */
+    code .comment {
+        color: #5c6370; /* Grey */
+    }
+
+    /* Python function and method styling */
+    code .function {
+        color: #61aeee; /* Blue */
+    }
+
+    /* Python number styling */
+    code .number {
+        color: #d19a66; /* Orange */
+    }
+

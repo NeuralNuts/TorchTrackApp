@@ -1,67 +1,73 @@
-﻿//
-//const BASE_URL = "https://localhost:7032/api/TorchTrack/";
+﻿//const BASE_URL = "https://localhost:7032/api/TorchTrack/";
 const BASE_URL = "https://torchtrackapp.azurewebsites.net/api/TorchTrack/";
 const FETCH_ERROR = "Failed to fetch data: ";
 const HTTP_ERROR = "HTTP error! Status: ";
 
 
-async function get_model_data() {
-    const url = `${BASE_URL}GetTorchModels`;
+async function getModelData() {
+    const URL = `${BASE_URL}GetTorchModels`;
+
     try {
-        const response = await fetch(url);
-        if (!response.ok) {
-            throw new Error(`${HTTP_ERROR} ${response.status}`);
+        const RESPONSE = await fetch(URL);
+
+        if (!RESPONSE.ok) {
+            throw new Error(`${HTTP_ERROR} ${RESPONSE.status}`);
         }
+        const MODEL_DATA = await RESPONSE.json();
 
-        const data = await response.json();
-        console.log(data);
-        // Assuming data is an array of training runs
-        data.forEach((model_data) => {
-            const parsedData = JSON.parse(model_data.model_optimizer);
-            const networkStr = model_data.model_architecure;
+        console.log(MODEL_DATA);
 
-            displayNetwork(networkStr);
-            displayJSON(parsedData);
+        MODEL_DATA.forEach((model_data) => {
+            const PARSED_DATA = JSON.parse(model_data.model_optimizer);
+            const NETWORK_STRING = model_data.model_architecure;
 
-            console.log(parsedData);
+            displayNetwork(NETWORK_STRING);
+            displayJSON(PARSED_DATA);
+
+            console.log(PARSED_DATA);
         });
 
     } catch (error) {
         console.error(FETCH_ERROR, error.message);
     }
 }
+
 function displayNetwork(networkStr) {
-    const outputDiv = document.getElementById('network-output');
+    const OUTPUT_DIV = document.getElementById('network-output');
+    const TITLES = networkStr.split('(')[0].trim();
+    const LAYERS = networkStr.match(/\(([^()]+)\)/g).map(layer => layer.slice(1, -1));  // Extract content within brackets
 
-    const title = networkStr.split('(')[0].trim();
-    const layers = networkStr.match(/\(([^()]+)\)/g).map(layer => layer.slice(1, -1));  // Extract content within brackets
+    let html = `<div class="title">${TITLES}</div>`;
 
-    let html = `<div class="title">${title}</div>`;
-    layers.forEach(layer => {
-        const parts = layer.split(':');
-        if (parts.length > 1) {
+    LAYERS.forEach(layer => {
+        const PARTS = layer.split(':');
+
+        if (PARTS.length > 1) {
             html += `<div class="layer">
-                        <div class="layer-name">${parts[0].trim()}</div>
-                        <div class="layer-details">${parts[1].trim()}</div>
+                        <div class="layer-name">${PARTS[0].trim()}</div>
+                        <div class="layer-details">${PARTS[1].trim()}</div>
                     </div>`;
         } else {
             html += `<div class="layer">
-                        <div class="layer-name">${parts[0].trim()}</div>
+                        <div class="layer-name">${PARTS[0].trim()}</div>
                     </div>`;
         }
     });
 
-    outputDiv.innerHTML = html;
+    OUTPUT_DIV.innerHTML = html;
 }
 
 function displayJSON(jsonObj) {
-    const outputDiv = document.getElementById('json-output');
+    const OUTPUT_DIV = document.getElementById('json-output');
+
     let html = '';
 
     if (jsonObj.param_groups && jsonObj.param_groups.length > 0) {
         html += '<div class="title">Param Groups:</div>';
+
         for (let group of jsonObj.param_groups) {
             html += '<ul class="list">';
+
             for (let key in group) {
                 if (Array.isArray(group[key])) {
                     html += `<li class="list-item"><span class="label">${key}:</span> ${group[key].join(', ')}</li>`;
@@ -76,17 +82,18 @@ function displayJSON(jsonObj) {
     if (jsonObj.state) {
         html += '<div class="title">State:</div>';
         html += '<ul class="list">';
+
         for (let key in jsonObj.state) {
-            const momentumBuffer = jsonObj.state[key] && jsonObj.state[key].momentum_buffer;
-            if (momentumBuffer !== undefined) {
-                html += `<li class="list-item"><span class="label">ID ${key}:</span><span class="value">momentum_buffer: ${momentumBuffer}</span></li>`;
+            const MOMEMTOM_BUFFER = jsonObj.state[key] && jsonObj.state[key].momentum_buffer;
+
+            if (MOMEMTOM_BUFFER !== undefined) {
+                html += `<li class="list-item"><span class="label">ID ${key}:</span><span class="value">momentum_buffer: ${MOMEMTOM_BUFFER}</span></li>`;
             }
         }
         html += '</ul>';
     }
 
-    outputDiv.innerHTML = html;
+    OUTPUT_DIV.innerHTML = html;
 }
 
-
-get_model_data();
+getModelData();

@@ -2,57 +2,14 @@
     ViewData["Title"] = "Home Page";
 }
 
-<style>
-    header, footer {
-        background-color: white;
-        color: black;
-        padding: 1rem;
-        text-align: center;
-    }
-
-    nav a {
-        margin: 0 15px;
-        color: white;
-        text-decoration: none;
-    }
-
-    .hero {
-        padding: 100px 0;
-        text-align: center;
-        background-color: white;
-    }
-
-    .features {
-        display: flex;
-        justify-content: space-around;
-        padding: 50px 0;
-    }
-
-    .feature-card {
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        padding: 20px;
-        background: white;
-        width: 30%;
-        text-align: center;
-    }
-
-    .title-icon {
-        height: 30px; /* Adjusts the height of the icon */
-        width: 30px; /* Adjusts the width of the icon */
-        margin-right: 10px; /* Adds space between the icon and text */
-        vertical-align: middle; /* Aligns the icon with the middle of the text */
-    }
-
-</style>
-
-<header>
+<header class="hero-page-header">
     <h1><i class="fa-solid fa-magnifying-glass fa-bounce fa-sm" style="color: #6200EE;"></i>TorchTrack</h1>
 </header>
 
 <div class="hero">
-    <h2>Track Your Model's Journey with TorchTrack</h2>
+    <h2 style="color: black;">Track Your Model's Journey with TorchTrack</h2>
     <p>The definitive tracking library for PyTorch.</p>
-    <button class="btn btn-secondary">Get Started</button>
+    <button  onclick="window.location.href = '@Url.Action("Documentation", "Home")'" class="btn btn-secondary">Get Started</button>
 </div>
 
 <div class="features">
