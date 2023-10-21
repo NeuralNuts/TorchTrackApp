@@ -66,11 +66,6 @@ namespace TorchTrackApp
             app.UseSwagger();
             app.UseSwaggerUI();
 
-            //app.UseEndpoints(endpoints =>
-            //{
-            //    endpoints.MapHub<MyHub>("/myhub");
-            //});
-
             app.UseHttpsRedirection();
             app.UseStaticFiles();
             app.UseRouting();
