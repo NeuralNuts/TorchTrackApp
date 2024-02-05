@@ -210,12 +210,6 @@ nav a {
     background-color: white;
 }
 
-.features {
-    display: flex;
-    justify-content: space-around;
-    padding: 50px 0;
-}
-
 .feature-card {
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
     padding: 20px;
@@ -224,68 +218,86 @@ nav a {
     text-align: center;
 }
 
-.title-icon {
-    height: 30px; /* Adjusts the height of the icon */
-    width: 30px; /* Adjusts the width of the icon */
-    margin-right: 10px; /* Adds space between the icon and text */
-    vertical-align: middle; /* Aligns the icon with the middle of the text */
+.features {
+    display: flex;
+    justify-content: space-around;
+    padding: 50px 0;
 }
 
-#parent-data-id {
-    transition: opacity 0.3s ease-out; /* adjust the duration if needed */
+@media only screen and (max-width: 600px) {
+    .features {
+        flex-direction: column; /* Stack cards vertically */
+        align-items: center; /* Center align items */
+    }
 
+    .feature-card {
+        width: 100%; /* Adjust width for better visibility */
+        margin-bottom: 20px; /* Add margin bottom for spacing between cards */
+        padding: 0px;
+    }
 }
 
+    .title-icon {
+        height: 30px; /* Adjusts the height of the icon */
+        width: 30px; /* Adjusts the width of the icon */
+        margin-right: 10px; /* Adds space between the icon and text */
+        vertical-align: middle; /* Aligns the icon with the middle of the text */
+    }
 
-#json-output {
-    background-color: #fff;
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
+    #parent-data-id {
+        transition: opacity 0.3s ease-out; /* adjust the duration if needed */
+    }
 
-.title {
-    color: #444;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
 
-.list {
-    list-style-type: none;
-    padding: 0;
-}
+    #json-output {
+        background-color: #fff;
+        border-radius: 10px;
+        padding: 20px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
 
-.list-item {
-    margin-bottom: 15px;
-}
+    .title {
+        color: #444;
+        font-weight: bold;
+        margin-bottom: 10px;
+    }
 
-.label {
-    font-weight: bold;
-    color: #555;
-}
+    .list {
+        list-style-type: none;
+        padding: 0;
+    }
 
-.value {
-    color: #888;
-    margin-left: 10px;
-}
+    .list-item {
+        margin-bottom: 15px;
+    }
 
-.layer {
-    border: 1px solid #ddd;
-    border-radius: 5px;
-    padding: 10px;
-    margin: 10px 0;
-}
+    .label {
+        font-weight: bold;
+        color: #555;
+    }
 
-.layer-name {
-    font-weight: bold;
-    color: #555;
-}
+    .value {
+        color: #888;
+        margin-left: 10px;
+    }
 
-.layer-details {
-    color: #888;
-}
+    .layer {
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        padding: 10px;
+        margin: 10px 0;
+    }
 
- #wrapper {
+    .layer-name {
+        font-weight: bold;
+        color: #555;
+    }
+
+    .layer-details {
+        color: #888;
+    }
+
+    #wrapper {
         display: flex;
         flex-direction: row;
     }
@@ -294,19 +306,19 @@ nav a {
         list-style-type: none;
         padding: 0;
     }
-  
-    nav ul li {
-        margin: 10px 0;
-    }
 
-    nav ul li a {
-        text-decoration: none;
-        color: #333;
-    }
+        nav ul li {
+            margin: 10px 0;
+        }
 
-    nav ul li a:hover, nav ul li a.active {
-        text-decoration: underline;
-    }
+            nav ul li a {
+                text-decoration: none;
+                color: #333;
+            }
+
+                nav ul li a:hover, nav ul li a.active {
+                    text-decoration: underline;
+                }
 
     main {
         flex: 3;
@@ -317,24 +329,24 @@ nav a {
         color: #7b4cfe;
     }
 
-h1 {
-    color: #7b4cfe;
-}
+    h1 {
+        color: #7b4cfe;
+    }
 
-.hero-page-header, footer {
+    .hero-page-header, footer {
         background-color: white;
         color: black;
         padding: 1rem;
         text-align: center;
     }
 
-.doc-sidebar {
-    position: -webkit-sticky; /* For Safari */
-    position: sticky;
-    border-right: solid;
-    border-color: rgba(0, 0, 0, 0.2);
-    top: 0; /* Stick to the top of the viewport */
-}
+    .doc-sidebar {
+        position: -webkit-sticky; /* For Safari */
+        position: sticky;
+        border-right: solid;
+        border-color: rgba(0, 0, 0, 0.2);
+        top: 0; /* Stick to the top of the viewport */
+    }
 
     nav a {
         margin: 0 15px;
@@ -348,20 +360,6 @@ h1 {
         background-color: white;
     }
 
-    .features {
-        display: flex;
-        justify-content: space-around;
-        padding: 50px 0;
-    }
-
-    .feature-card {
-        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-        padding: 20px;
-        background: white;
-        width: 30%;
-        text-align: center;
-    }
-
     .title-icon {
         height: 30px; /* Adjusts the height of the icon */
         width: 30px; /* Adjusts the width of the icon */
@@ -369,65 +367,65 @@ h1 {
         vertical-align: middle; /* Aligns the icon with the middle of the text */
     }
 
-/* Base styling for code block */
-code {
-    display: block;
-    padding: 16px;
-    margin: 16px 0;
-    overflow-x: auto;
-    font-family: Arial, monospace;
-    font-size: 15px;
-    line-height: 1.5;
-    background-color: #282c34; /* Dark background */
-    color: #ffffff; /* White text for main content */
-    border-radius: 4px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
-}
-
-    /* Python keyword styling */
-    code .keyword {
-        color: #c678dd; /* Purple */
+    /* Base styling for code block */
+    code {
+        display: block;
+        padding: 16px;
+        margin: 16px 0;
+        overflow-x: auto;
+        font-family: Arial, monospace;
+        font-size: 15px;
+        line-height: 1.5;
+        background-color: #282c34; /* Dark background */
+        color: #ffffff; /* White text for main content */
+        border-radius: 4px;
+        box-shadow: 0 2px 5px rgba(0,0,0,0.2);
     }
 
-    /* Python string styling */
-    code .string {
-        color: #98c379; /* Green */
+        /* Python keyword styling */
+        code .keyword {
+            color: #c678dd; /* Purple */
+        }
+
+        /* Python string styling */
+        code .string {
+            color: #98c379; /* Green */
+        }
+
+        /* Python comment styling */
+        code .comment {
+            color: #5c6370; /* Grey */
+        }
+
+        /* Python function and method styling */
+        code .function {
+            color: #61aeee; /* Blue */
+        }
+
+        /* Python number styling */
+        code .number {
+            color: #d19a66; /* Orange */
+        }
+
+    /* Width */
+    ::-webkit-scrollbar {
+        width: 10px;
     }
 
-    /* Python comment styling */
-    code .comment {
-        color: #5c6370; /* Grey */
+    /* Track */
+    ::-webkit-scrollbar-track {
+        background: #f1f1f1;
+        border-radius: 5px;
     }
 
-    /* Python function and method styling */
-    code .function {
-        color: #61aeee; /* Blue */
+    /* Handle */
+    ::-webkit-scrollbar-thumb {
+        background: #888;
+        border-radius: 5px;
     }
 
-    /* Python number styling */
-    code .number {
-        color: #d19a66; /* Orange */
-    }
-
-/* Width */
-::-webkit-scrollbar {
-    width: 10px;
-}
-
-/* Track */
-::-webkit-scrollbar-track {
-    background: #f1f1f1;
-    border-radius: 5px;
-}
-
-/* Handle */
-::-webkit-scrollbar-thumb {
-    background: #888;
-    border-radius: 5px;
-}
-
-    /* Handle on hover */
-    ::-webkit-scrollbar-thumb:hover {
-        background: #555;
-    }
+        /* Handle on hover */
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
 
